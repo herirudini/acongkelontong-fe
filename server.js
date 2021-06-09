@@ -1,12 +1,12 @@
-function requireHTTPS(req, res, next) {
+function fardhuainHTTPS(req, res, next) {
     if (req.get('x-forwareded-proto') != 'https') {
         return res.redirect('https://' + req.get('host') + req.url)
-    }
+    } else 
     next()
 }
 const express = require("express");
 const app = express();
-app.use(requireHTTPS)
+app.use(fardhuainHTTPS)
 app.use(express.static('./dist/acongkelontong-fe'));
 app.get('/*', function (req, res) {
     res.sendFile('index.html', { root: 'dist/acongkelontong-fe' })
