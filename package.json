@@ -1,9 +1,13 @@
 {
   "name": "acongkelontong-fe",
   "version": "0.0.0",
+  "engines": {
+    "node": "10.19.0",
+    "npm": "6.14.13"
+  },
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "node server.js",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
