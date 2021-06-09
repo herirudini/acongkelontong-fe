@@ -10,17 +10,17 @@ import { CashierService } from 'src/app/_services/cashier.service';
 })
 export class CartComponent implements OnInit, OnDestroy {
   listCart!: Cart[];
-  private authStatusSub = new Subscription();
+  private cartListSub = new Subscription();
 
   constructor(private cashierService: CashierService) {}
 
   ngOnInit(): void {
-    this.authStatusSub = this.cashierService.getListCart().subscribe((Cart) => {
+    this.cartListSub = this.cashierService.getListCart().subscribe((Cart) => {
       this.listCart = Cart;
     });
   }
 
   ngOnDestroy() {
-    this.authStatusSub.unsubscribe();
+    this.cartListSub.unsubscribe();
   }
 }
