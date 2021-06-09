@@ -12,6 +12,7 @@
       <table class="table m-0">
         <thead>
           <tr>
+            <th scope="col">Id Supplier
             <th scope="col">Nama Supplier</th>
             <th scope="col">Kontak</th>
             <th scope="col">Alamat</th>
@@ -20,6 +21,7 @@
         </thead>
         <tbody *ngFor="let supplier of listSupplier">
           <tr>
+            <td>{{ supplier._id }}</td>
             <td>{{ supplier.suplier_name }}</td>
             <td>{{ supplier.contact }}</td>
             <td>{{ supplier.address }}</td>
