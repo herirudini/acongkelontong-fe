@@ -2,12 +2,12 @@
   <h4>Outcome</h4>
   <br /><br />
   <div class="card-body p-0">
-    <form [formGroup]="OutcomeForm" (ngSubmit)="onSubmit()">
+    <form [formGroup]="outcomeForm" (ngSubmit)="onSubmit()">
       <div class="card-body form-row">
         <div class="form-group col-4 col-md-4">
           <label for="inputDateFrom">Date From</label>
           <input
-            type="date_from"
+            type="date"
             formControlName="date_from"
             class="form-control"
             placeholder="Date From"
@@ -17,7 +17,7 @@
         <div class="form-group col-4 col-md-4">
           <label for="inputDateT">Date To</label>
           <input
-            type="date_to"
+            type="date"
             formControlName="date_to"
             class="form-control"
             placeholder="Date To"

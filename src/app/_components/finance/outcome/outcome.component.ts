@@ -12,25 +12,24 @@ import { FinanceService } from 'src/app/_services/finance.service';
   styleUrls: ['./outcome.component.css']
 })
 export class OutcomeComponent implements OnInit {
-  @Output() Getoutcome!: EventEmitter<{ date_from : string; date_to :  string; }>;
-  OutcomeForm! : FormGroup
-  outcome! : Invoice[];
+  outcomeForm!: FormGroup
+  outcome!: Invoice[];
   constructor(
     public formBuilder: FormBuilder,
     private financeService: FinanceService,
-    public router: Router) 
-    {this.Getoutcome = new EventEmitter<{ date_from : string; date_to :  string; }>()}
+    public router: Router
+  ) { }
 
-  ngOnInit(): void { 
-    this.OutcomeForm =  this.formBuilder.group({
+  ngOnInit(): void {
+    this.outcomeForm = this.formBuilder.group({
       date_from: [null, [Validators.required]],
       date_to: [null, [Validators.required]],
     });
   }
-  onSubmit(){
-    console.log("ok")
-    this.financeService.GetOutcome(this.OutcomeForm.value).subscribe((response: any) => {
+  onSubmit() {
+    console.log("ok", this.outcomeForm.value)
+    this.financeService.GetOutcome(this.outcomeForm.value).subscribe((response: any) => {
       console.log(response)
-  });
-}
+    });
+  }
 }
