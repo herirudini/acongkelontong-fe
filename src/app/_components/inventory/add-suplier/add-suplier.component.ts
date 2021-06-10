@@ -15,8 +15,8 @@ export class AddSuplierComponent implements OnInit {
   constructor(
     public formBuilder: FormBuilder,
     public inventoryService: InventoryService,
-    public router: Router
-  ) {this.createSuplier = new EventEmitter<{ suplier_name : string; contact: string; address: string; }>()}
+    public router: Router) 
+    {this.createSuplier = new EventEmitter<{ suplier_name : string; contact: string; address: string; }>()}
 
   ngOnInit(): void {
     this.addSuplierForm = this.formBuilder.group({

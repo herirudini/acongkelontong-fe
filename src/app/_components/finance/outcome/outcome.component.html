@@ -1,1 +1,52 @@
-<p>outcome works!</p>
+<div class="invoice">
+  <h4>Outcome</h4>
+  <br /><br />
+  <div class="card-body p-0">
+    <form [formGroup]="OutcomeForm" (ngSubmit)="onSubmit()">
+      <div class="card-body form-row">
+        <div class="form-group col-4 col-md-4">
+          <label for="inputDateFrom">Date From</label>
+          <input
+            type="date_from"
+            formControlName="date_from"
+            class="form-control"
+            placeholder="Date From"
+          />
+        </div>
+        
+        <div class="form-group col-4 col-md-4">
+          <label for="inputDateT">Date To</label>
+          <input
+            type="date_to"
+            formControlName="date_to"
+            class="form-control"
+            placeholder="Date To"
+          />
+        </div>
+        
+     
+           <div> <button type="submit" class="btn btn-primary">Submit</button></div>
+         
+        <table class="table table-striped table-bordered table-hover">
+            
+          <thead class="thead-dark">
+            <tr>
+              <th scope="col">id</th>
+              <th scope="col">Supplier Name</th>
+              <th scope="col">Bill</th>
+              <th scope="col">Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let invoice of outcome">
+              <td>{{ invoice._id }}</td>
+              <td>{{ invoice.suplier_name }}</td>
+              <td>{{ invoice.bill | currency: "IDR" }}</td>
+              <td>{{ invoice.status }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </form>
+  </div>
+</div>

@@ -19,4 +19,7 @@ export class FinanceService {
       })
     );
   }
+  GetOutcome(data: any) {
+    return this.http.get<any>(`${apiURL}/finance/outcome`, data);
+  }
 }
