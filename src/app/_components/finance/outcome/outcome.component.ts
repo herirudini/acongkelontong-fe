@@ -13,7 +13,7 @@ import { FinanceService } from 'src/app/_services/finance.service';
 })
 export class OutcomeComponent implements OnInit {
   outcomeForm!: FormGroup
-  outcome!: Invoice[];
+  outcome!: any
   constructor(
     public formBuilder: FormBuilder,
     private financeService: FinanceService,
@@ -28,8 +28,9 @@ export class OutcomeComponent implements OnInit {
   }
   onSubmit() {
     console.log("ok", this.outcomeForm.value)
-    this.financeService.GetOutcome(this.outcomeForm.value).subscribe((response: any) => {
-      console.log(response)
+    this.financeService.GetOutcome(this.outcomeForm.value).subscribe((Outcome : any) => {
+      this.outcome = Outcome.data
+      console.log(Outcome)
     });
   }
 }
