@@ -1,5 +1,5 @@
-import { Component, OnInit, Output ,EventEmitter } from '@angular/core';
-import { FormBuilder, FormGroup, Validators  } from '@angular/forms';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
 import { InventoryService } from 'src/app/_services/inventory.service';
@@ -11,19 +11,28 @@ import Swal from 'sweetalert2';
   styleUrls: ['./create-product.component.css']
 })
 export class CreateProductComponent implements OnInit {
-  @Output() createProduct!: EventEmitter<{status : string; supplier_name : string; brand_name : string; 
-    product_name :string; image :string; uom : string; stock : number;
-      buyPrice: number; sellPrice : number; isAfterTax : string; barcode : string; }>;
-      addProductForm! : FormGroup;
+  @Output() createProduct!: EventEmitter<{
+    status: string; supplier_name: string; brand_name: string;
+    product_name: string; image: string; uom: string; stock: number;
+    buyPrice: number; sellPrice: number; isAfterTax: string; barcode: string;
+  }>;
+  suplierList!: any;
+  addProductForm!: FormGroup;
   constructor(public formBuilder: FormBuilder,
     public inventoryService: InventoryService,
-    public router: Router)
-     { this.createProduct = new EventEmitter<{status : string; supplier_name : string; brand_name : string; 
-      product_name :string; image :string; uom : string; stock : number;
-        buyPrice: number; sellPrice : number; isAfterTax : string; barcode : string; }>()}
+    public router: Router) {
+    this.createProduct = new EventEmitter<{
+      status: string; supplier_name: string; brand_name: string;
+      product_name: string; image: string; uom: string; stock: number;
+      buyPrice: number; sellPrice: number; isAfterTax: string; barcode: string;
+    }>()
+  }
 
   ngOnInit(): void {
-    this.addProductForm =  this.formBuilder.group({
+    this.inventoryService.listSuplier().subscribe((response: any)=> {
+      this.suplierList = response.data
+    })
+    this.addProductForm = this.formBuilder.group({
       status: [null, [Validators.required]],
       suplier_name: [null, [Validators.required]],
       brand_name: [null, [Validators.required]],
@@ -35,14 +44,14 @@ export class CreateProductComponent implements OnInit {
       sellPrice: [null, [Validators.required]],
       isAfterTax: [null, [Validators.required]],
       barcode: [null, [Validators.required]],
-    
+
     });
   }
- onSubmit(){
-   this.inventoryService.addProduct(this.addProductForm.value).subscribe((response:any) =>{
-     console.log(response)
-     Swal.fire("Success", "Add Product success..", "success");
-   });
- }
- 
+  onSubmit() {
+    this.inventoryService.addProduct(this.addProductForm.value).subscribe((response: any) => {
+      console.log(response)
+      Swal.fire("Success", "Add Product success..", "success");
+    });
+  }
+
 }
