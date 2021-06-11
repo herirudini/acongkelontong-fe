@@ -16,7 +16,6 @@ export class CreateProductComponent implements OnInit {
     product_name: string; image: string; uom: string; stock: number;
     buyPrice: number; sellPrice: number; isAfterTax: string; barcode: string;
   }>;
-  valueSuplier!: any;
   suplierList!: any;
   brandList!: any;
   productList!: any;
@@ -66,6 +65,7 @@ export class CreateProductComponent implements OnInit {
     })
   }
   onSubmit() {
+    console.log("checkformvalue:", this.addProductForm.value)
     this.inventoryService.addProduct(this.addProductForm.value).subscribe((response: any) => {
       console.log(response)
       Swal.fire("Success", "Add Product success..", "success");
