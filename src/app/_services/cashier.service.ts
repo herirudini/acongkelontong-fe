@@ -12,7 +12,7 @@ export class CashierService {
   constructor(private http: HttpClient) {}
 
   addToCart(data: any) {
-    return this.http.put<any>(`${apiURL}/cashier/product`, data);
+    return this.http.post<any>(`${apiURL}/cashier/product`, data);
   }
 
   getListCart() {
@@ -21,5 +21,16 @@ export class CashierService {
         return res.data || {};
       })
     );
+  }
+
+  cancelCart(cartId: any, notes: any) {
+    console.log('masuk service cancelcart');
+
+    return this.http.put<any>(`${apiURL}/cashier/cart/${cartId}`, notes);
+  }
+
+  checkOut(data: any) {
+    console.log('masuk service checkout');
+    return this.http.post<any>(`${apiURL}/cashier/checkout`, data);
   }
 }
