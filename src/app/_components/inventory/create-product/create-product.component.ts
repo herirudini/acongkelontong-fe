@@ -16,8 +16,11 @@ export class CreateProductComponent implements OnInit {
     product_name: string; image: string; uom: string; stock: number;
     buyPrice: number; sellPrice: number; isAfterTax: string; barcode: string;
   }>;
+  valueSuplier!: any;
   suplierList!: any;
   brandList!: any;
+  productList!: any;
+  uomList!: any;
 
   addProductForm!: FormGroup;
   constructor(public formBuilder: FormBuilder,
@@ -45,11 +48,21 @@ export class CreateProductComponent implements OnInit {
       isAfterTax: [null, [Validators.required]],
       barcode: [null, [Validators.required]],
     });
-    this.addProductForm.controls['suplier_name'].valueChanges.subscribe(value => {
-      console.log(value)
-      this.inventoryService.listBrand(value).subscribe((response: any) => {
+    this.onChanges();
+  }
+  onChanges(): void{
+    this.addProductForm.valueChanges.subscribe(value => {
+      const reqBodySuplier: object = { suplier_name: value.suplier_name };
+      const reqBodyBrand: object = { brand_name: value.brand_name };
+      this.inventoryService.listBrand(reqBodySuplier).subscribe((response: any) => {
+        console.log(response)
         this.brandList = response.data.brands
-      })
+      });
+      this.inventoryService.listProductUom(reqBodyBrand).subscribe((response: any) => {
+        console.log(response)
+        this.productList = response.data.product_name
+        this.uomList = response.data.uom
+      });
     })
   }
   onSubmit() {

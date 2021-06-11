@@ -12,14 +12,14 @@ export class AuthService {
   public localStorage: any;
   constructor(private http: HttpClient, private router: Router) { }
 
-  login(reqBody: any) {
-    return this.http.put(`${apiURL}/login`, reqBody);
+  login(data: any) {
+    return this.http.put(`${apiURL}/login`, data);
   }
-  forgetPassword(reqBody: any) {
-    return this.http.put(`${apiURL}/login/forget-password`, reqBody);
+  forgetPassword(data: any) {
+    return this.http.put(`${apiURL}/login/forget-password`, data);
   }
-  resetPassword(user_id: any, superkey: any, reqBody: any) {
-    return this.http.patch(`${apiURL}/login/reset-password/${user_id}/${superkey}`, reqBody);
+  resetPassword(user_id: any, superkey: any, data: any) {
+    return this.http.patch(`${apiURL}/login/reset-password/${user_id}/${superkey}`, data);
   }
   getToken() {
     return localStorage.getItem('access_token');

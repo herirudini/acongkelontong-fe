@@ -22,32 +22,47 @@
           <label for="inputNamaSuplier">Suplier</label>
           <select class="custom-select mr-sm-2" id="inputNamaSuplier" formControlName="suplier_name">
             <option value=""></option>
-            <option *ngFor="let suplier of suplierList" value="{{suplier.suplier_name">{{suplier.suplier_name}}</option>
+            <option *ngFor="let suplier of suplierList" value="{{suplier.suplier_name}}">{{suplier.suplier_name}}</option>
           </select>
         </div>
-
+        <!-- <div class="form-group col-4 col-md-4">
+          <label for="inputBrand">Brand</label>
+          <select class="custom-select mr-sm-2" id="inputBrand" formControlName="brand_name">
+            <option value=""></option>
+            <option *ngFor="let brand of brandList" value="{{brand}}">{{brand}}</option>
+          </select>
+        </div> -->
         <div class="form-group col-4 col-md-2">
           <label for="inputBrand">Brand</label>
-          <input type="text"  id="inputBrand" class="form-control" list="brands" formControlName="suplier_name" />
+          <input type="text"  id="inputBrand" class="form-control" list="brands" formControlName="brand_name" />
           <datalist id="brands">
-            <option *ngFor="let brand of brandList">{{brand.brand_name}</option>
+            <option *ngFor="let brand of brandList">{{brand}}</option>
           </datalist>
-          <!-- <input type="text" formControlName="brand_name" class="form-control" id="inputBrand" placeholder="Brand" /> -->
         </div>
 
-
         <div class="form-group col-4 col-md-2">
+          <label for="inputNamaProduk">Product</label>
+          <input type="text"  id="inputNamaProduk" class="form-control" list="products" formControlName="product_name" />
+          <datalist id="products">
+            <option *ngFor="let product of productList">{{product}}</option>
+          </datalist>
+        </div>
+        <div class="form-group col-4 col-md-2">
+          <label for="inputUOM">Unit Of Measure</label>
+          <input type="text"  id="inputUOM" class="form-control" list="uoms" formControlName="uom" />
+          <datalist id="uoms">
+            <option *ngFor="let uom of uomList">{{uom}}</option>
+          </datalist>
+        </div>
+        <!-- <div class="form-group col-4 col-md-2">
           <label for="inputNamaProduk">Product Name</label>
           <input type="text" formControlName="product_name" class="form-control" id="inputNamaProduk"
             placeholder="Nama Produk" />
-        </div>
-
-        <!-- <div class="form-group col-4 col-md-2">
-          <label for="inputHargaBeli">Stock</label>
-          <input type="text" formControlName="stock" class="form-control" id="inputHargaBeli"
-            placeholder="Harga Beli" />
         </div> -->
-
+        <!-- <div class="form-group col-4 col-md-2">
+          <label for="inputUOM">Unit of measure</label>
+          <input type="text" formControlName="uom" class="form-control" id="inputUOM" placeholder="UOM" />
+        </div> -->
         <div class="form-group col-4 col-md-2">
           <label for="inputHargaJual">Harga Jual</label>
           <input type="text" formControlName="sellPrice" class="form-control" id="inputHargaJual"
@@ -59,10 +74,7 @@
           <input type="text" formControlName="buyPrice" class="form-control" id="inputHargaBeli"
             placeholder="Harga Beli" />
         </div>
-        <div class="form-group col-4 col-md-2">
-          <label for="inputUOM">Unit of measure</label>
-          <input type="text" formControlName="uom" class="form-control" id="inputUOM" placeholder="UOM" />
-        </div>
+        
         <div class="form-group col-4 col-md-2">
           <label for="inputBarcode">Barcode</label>
           <input type="text" formControlName="barcode" class="form-control" id="inputBarcode" placeholder="Barcode" />

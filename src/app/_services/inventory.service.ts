@@ -20,7 +20,10 @@ export class InventoryService {
     return this.http.get<any>(`${apiURL}/inventory/suplier`);
   }
   listBrand(data: any){
-    return this.http.get<any>(`${apiURL}/inventory/list-brand`);
+    return this.http.put<any>(`${apiURL}/inventory/list-brand`, data);
+  }
+  listProductUom(data: any){
+    return this.http.put<any>(`${apiURL}/inventory/list-product-uom`, data);
   }
   addProduct(data: any) {
     return this.http.post<any>(`${apiURL}/inventory/product`, data);
