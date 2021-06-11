@@ -28,8 +28,13 @@
 
         <div class="form-group col-4 col-md-2">
           <label for="inputBrand">Brand</label>
-          <input type="text" formControlName="brand_name" class="form-control" id="inputBrand" placeholder="Brand" />
+          <input type="text"  id="inputBrand" class="form-control" list="brands" formControlName="suplier_name" />
+          <datalist id="brands">
+            <option *ngFor="let brand of brandList">{{brand.brand_name}</option>
+          </datalist>
+          <!-- <input type="text" formControlName="brand_name" class="form-control" id="inputBrand" placeholder="Brand" /> -->
         </div>
+
 
         <div class="form-group col-4 col-md-2">
           <label for="inputNamaProduk">Product Name</label>
@@ -51,7 +56,8 @@
 
         <div class="form-group col-4 col-md-2">
           <label for="inputHargaBeli">Harga beli</label>
-          <input type="text" formControlName="buyPrice" class="form-control" id="inputHargaBeli" placeholder="Harga Beli" />
+          <input type="text" formControlName="buyPrice" class="form-control" id="inputHargaBeli"
+            placeholder="Harga Beli" />
         </div>
         <div class="form-group col-4 col-md-2">
           <label for="inputUOM">Unit of measure</label>
@@ -62,17 +68,28 @@
           <input type="text" formControlName="barcode" class="form-control" id="inputBarcode" placeholder="Barcode" />
         </div>
 
-        <!-- <div class="form-group col-4 col-md-2">
-          <label for="inputStatus">AfterTax</label>
-          <input type="text" formControlName="isAfterTax" class="form-control" id="inputStatus" placeholder="Status" />
-        </div> -->
         <div class="form-group col-4 col-md-4">
-          <label for="inputAddress">AfterTax</label>
-          <select class="custom-select mr-sm-2" id="inputStatus" formControlName="isAfterTax">
+          <label for="isAfterTax">AfterTax</label>
+          <div class="form-group">
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" id="isAfterTax" value="yes" formControlName="isAfterTax">
+              <label class="form-check-label" for="isAfterTax">
+                Yes
+              </label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" id="isAfterTax" value="no" formControlName="isAfterTax">
+              <label class="form-check-label" for="isAfterTax">
+                No
+              </label>
+            </div>
+            <!-- <select class="custom-select mr-sm-2" id="inputStatus" formControlName="isAfterTax">
             <option value="yes">Yes</option>
             <option value="no">No</option>
-          </select>
+          </select> -->
+          </div>
         </div>
+
 
 
         <div class="form-group col-9 col-md-4">

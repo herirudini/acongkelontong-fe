@@ -17,6 +17,8 @@ export class CreateProductComponent implements OnInit {
     buyPrice: number; sellPrice: number; isAfterTax: string; barcode: string;
   }>;
   suplierList!: any;
+  brandList!: any;
+
   addProductForm!: FormGroup;
   constructor(public formBuilder: FormBuilder,
     public inventoryService: InventoryService,
@@ -29,23 +31,26 @@ export class CreateProductComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.inventoryService.listSuplier().subscribe((response: any)=> {
+    this.inventoryService.listSuplier().subscribe((response: any) => {
       this.suplierList = response.data
     })
     this.addProductForm = this.formBuilder.group({
-      status: [null, [Validators.required]],
       suplier_name: [null, [Validators.required]],
       brand_name: [null, [Validators.required]],
       product_name: [null, [Validators.required]],
       image: [null, [Validators.required]],
       uom: [null, [Validators.required]],
-      stock: [null, [Validators.required]],
       buyPrice: [null, [Validators.required]],
       sellPrice: [null, [Validators.required]],
       isAfterTax: [null, [Validators.required]],
       barcode: [null, [Validators.required]],
-
     });
+    this.addProductForm.controls['suplier_name'].valueChanges.subscribe(value => {
+      console.log(value)
+      this.inventoryService.listBrand(value).subscribe((response: any) => {
+        this.brandList = response.data.brands
+      })
+    })
   }
   onSubmit() {
     this.inventoryService.addProduct(this.addProductForm.value).subscribe((response: any) => {
