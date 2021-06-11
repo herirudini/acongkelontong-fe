@@ -9,7 +9,7 @@ import { map } from 'rxjs/operators';
   providedIn: 'root',
 })
 export class FinanceService {
-  constructor(private http: HttpClient, private auth: AuthService) {}
+  constructor(private http: HttpClient) {}
   getInvoice() {
     return this.http.get<any>(`${apiURL}/finance/invoice`).pipe(
       map((res) => {
@@ -18,5 +18,8 @@ export class FinanceService {
         return res.data || {};
       })
     );
+  }
+  GetOutcome(data: any) {
+    return this.http.put(`${apiURL}/finance/outcome`, data);
   }
 }

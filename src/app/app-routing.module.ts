@@ -10,6 +10,7 @@ import { AuthGuard } from './_services/auth.guard';
 import { ForgetPasswordComponent } from './_components/login/forget-password/forget-password.component';
 import { ResetPasswordComponent } from './_components/login/reset-password/reset-password.component';
 import { HomeComponent } from './_components/home/home.component';
+import { OutcomeComponent } from './_components/finance/outcome/outcome.component';
 
 const routes: Routes = [
   {
@@ -44,6 +45,10 @@ const routes: Routes = [
   {
     path: 'finance',
     component: FinanceComponent,
+  },
+  {
+    path: 'finance/outcome',
+    component: OutcomeComponent,
   },
   {
     path: 'home',
