@@ -37,6 +37,7 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { FormAddToCartComponent } from './_components/cashier/form-add-to-cart/form-add-to-cart.component';
 import { ProductListInventoryComponent } from './_components/inventory/product-list-inventory/product-list-inventory.component';
 import { ProductListCashierComponent } from './_components/cashier/product-list-cashier/product-list-cashier.component';
+import { ProductListComponent } from './_components/shared/product-list/product-list.component';
 
 @NgModule({
   declarations: [
@@ -66,6 +67,7 @@ import { ProductListCashierComponent } from './_components/cashier/product-list-
     PurchaseFormComponent,
     HomeComponent,
     FormAddToCartComponent,
+    ProductListComponent,
     ProductListInventoryComponent,
     ProductListCashierComponent
   ],
