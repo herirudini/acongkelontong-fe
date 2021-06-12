@@ -29,14 +29,11 @@ import { ResetPasswordComponent } from './_components/login/reset-password/reset
 import { DeliveryOrderComponent } from './_components/inventory/delivery-order/delivery-order.component';
 import { IncomeComponent } from './_components/finance/income/income.component';
 import { OutcomeComponent } from './_components/finance/outcome/outcome.component';
-import { ReceiptComponent } from './_components/cashier/receipt/receipt.component';
 import { CartComponent } from './_components/cashier/cart/cart.component';
 import { PurchaseFormComponent } from './_components/inventory/purchase-form/purchase-form.component';
 import { HomeComponent } from './_components/home/home.component';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
-import { FormAddToCartComponent } from './_components/cashier/form-add-to-cart/form-add-to-cart.component';
 import { ProductListInventoryComponent } from './_components/inventory/product-list-inventory/product-list-inventory.component';
-import { ProductListCashierComponent } from './_components/cashier/product-list-cashier/product-list-cashier.component';
 import { ProductListComponent } from './_components/shared/product-list/product-list.component';
 import { NavbarComponent } from './_components/shared/navbar/navbar.component';
 
@@ -63,14 +60,11 @@ import { NavbarComponent } from './_components/shared/navbar/navbar.component';
     DeliveryOrderComponent,
     IncomeComponent,
     OutcomeComponent,
-    ReceiptComponent,
     CartComponent,
     PurchaseFormComponent,
     HomeComponent,
-    FormAddToCartComponent,
     ProductListComponent,
     ProductListInventoryComponent,
-    ProductListCashierComponent,
     NavbarComponent
   ],
   imports: [
