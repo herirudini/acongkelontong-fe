@@ -1,4 +1,5 @@
 export interface Product {
+    _id : string;
     status: string;
     suplier_name: string;
     brand_name: string;

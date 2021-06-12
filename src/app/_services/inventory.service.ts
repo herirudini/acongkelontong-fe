@@ -5,12 +5,14 @@ import { environment } from 'src/environments/environment';
 
 const apiURL: string = environment.ApiUrl;
 import { map } from 'rxjs/operators';
+import Swal from 'sweetalert2';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
 })
 export class InventoryService {
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient , private router: Router) {}
   addSuplier(data: any) {
     console.log('ok2');
     console.log(data);
@@ -33,6 +35,14 @@ export class InventoryService {
   }
   addDeliveryOrder(data: any) {
     return this.http.post<any>(`${apiURL}/inventory/delivery-order`, data);
+  }
+  UpdateStatus(status: string, id:string): any {
+    return this.http.patch(`${apiURL}/inventory/product/status/${id}`, {status : status}).subscribe((response: any) => {
+      if (response.success) {
+        Swal.fire('Berhasil', 'Berhasil Edit Status', 'success')
+        this.router.navigate(['inventory']);
+      }
+    })
   }
 
   getProduct() {
