@@ -12,7 +12,11 @@ import { Router } from '@angular/router';
   providedIn: 'root',
 })
 export class InventoryService {
+<<<<<<< HEAD
   constructor(private http: HttpClient, private router: Router) {}
+=======
+  constructor(private http: HttpClient, private router: Router) { }
+>>>>>>> 4b1ba3d070fd69dc4031e4a310f56c1743a2ac62
   addSuplier(data: any) {
     console.log('ok2');
     console.log(data);
@@ -36,22 +40,20 @@ export class InventoryService {
   addDeliveryOrder(data: any) {
     return this.http.post<any>(`${apiURL}/inventory/delivery-order`, data);
   }
-  UpdateStatus(status: string, id: string): any {
-    return this.http
-      .patch(`${apiURL}/inventory/product/status/${id}`, { status: status })
-      .subscribe((response: any) => {
-        if (response.success) {
-          Swal.fire('Berhasil', 'Berhasil Edit Status', 'success');
-          this.router.navigate(['inventory']);
-        }
-      });
-  }
-
   getAllProduct() {
     return this.http.get<any>(`${apiURL}/inventory/product`).pipe(
       map((res) => {
         return res.data || {};
       })
     );
+  }
+  UpdateStatus(params: string, data: any): any {
+    return this.http.patch(`${apiURL}/inventory/product/status/${params}`, data)
+    //   .subscribe((response: any) => {
+    //     if (response.success) {
+    //       Swal.fire('Berhasil', 'Berhasil Edit Status', 'success')
+    //       this.router.navigate(['inventory']);
+    //     }
+    //   })
   }
 }

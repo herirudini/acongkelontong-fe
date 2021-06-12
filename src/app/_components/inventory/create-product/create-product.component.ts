@@ -11,30 +11,21 @@ import Swal from 'sweetalert2';
   styleUrls: ['./create-product.component.css']
 })
 export class CreateProductComponent implements OnInit {
-  @Output() createProduct!: EventEmitter<{
-    status: string; supplier_name: string; brand_name: string;
-    product_name: string; image: string; uom: string; stock: number;
-    buyPrice: number; sellPrice: number; isAfterTax: string; barcode: string;
-  }>;
+
+  addProductForm!: FormGroup;
   suplierList!: any;
   brandList!: any;
   productList!: any;
   uomList!: any;
 
-  addProductForm!: FormGroup;
-  constructor(public formBuilder: FormBuilder,
-    public inventoryService: InventoryService,
-    public router: Router) {
-    this.createProduct = new EventEmitter<{
-      status: string; supplier_name: string; brand_name: string;
-      product_name: string; image: string; uom: string; stock: number;
-      buyPrice: number; sellPrice: number; isAfterTax: string; barcode: string;
-    }>()
-  }
+  constructor(public formBuilder: FormBuilder, public inventoryService: InventoryService, public router: Router) { }
+
+  subscribeListSuplier: any;
 
   ngOnInit(): void {
-    this.inventoryService.listSuplier().subscribe((response: any) => {
+    this.subscribeListSuplier = this.inventoryService.listSuplier().subscribe((response: any) => {
       this.suplierList = response.data
+      this.subscribeListSuplier.unsubscribe()
     })
     this.addProductForm = this.formBuilder.group({
       suplier_name: [null, [Validators.required]],
@@ -49,25 +40,37 @@ export class CreateProductComponent implements OnInit {
     });
     this.onChanges();
   }
-  onChanges(): void{
-    this.addProductForm.valueChanges.subscribe(value => {
+
+  subscribeValueChange: any;
+  subscribeListBrand: any;
+  subscribeListProductUom: any;
+
+  onChanges(): void {
+    this.subscribeValueChange = this.addProductForm.valueChanges.subscribe(value => {
       const reqBodySuplier: object = { suplier_name: value.suplier_name };
       const reqBodyBrand: object = { brand_name: value.brand_name };
-      this.inventoryService.listBrand(reqBodySuplier).subscribe((response: any) => {
+      this.subscribeListBrand = this.inventoryService.listBrand(reqBodySuplier).subscribe((response: any) => {
         console.log(response)
         this.brandList = response.data.brands
+        this.subscribeListBrand.unsubscribe()
       });
-      this.inventoryService.listProductUom(reqBodyBrand).subscribe((response: any) => {
+      this.subscribeListProductUom = this.inventoryService.listProductUom(reqBodyBrand).subscribe((response: any) => {
         console.log(response)
         this.productList = response.data.product_name
         this.uomList = response.data.uom
+        this.subscribeListProductUom.unsubscribe()
       });
+      this.subscribeValueChange.unsubscribe()
     })
   }
+
+  subscribeCreateProduct: any;
+  
   onSubmit() {
     console.log("checkformvalue:", this.addProductForm.value)
-    this.inventoryService.addProduct(this.addProductForm.value).subscribe((response: any) => {
+    this.subscribeCreateProduct = this.inventoryService.addProduct(this.addProductForm.value).subscribe((response: any) => {
       console.log(response)
+      this.subscribeCreateProduct.unsubscribe()
       Swal.fire("Success", "Add Product success..", "success");
     });
   }
