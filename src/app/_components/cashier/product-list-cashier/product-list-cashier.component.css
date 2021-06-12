@@ -1,25 +1,33 @@
 div.card.product {
-    border: 2px solid black;
-    border-radius: 6px;
-  }
-  
-  h2,
-  h4.modal-title {
-    font-weight: bold;
-  }
-  
-  a.page-link {
-    color: black !important;
-  }
-  
-  div.input-group.input-group-sm.ml-auto {
-    margin-top: 15px;
-    margin-right: 25px;
-    margin-bottom: 15px;
-  }
-  
-  nav.pagination {
-    margin-top: 15px;
-    margin-left: 30px;
-  }
-  
+  border: 2px solid black;
+  border-radius: 6px;
+}
+
+h4 {
+  background-color: black;
+  color: white;
+  padding-left: 10px;
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
+
+table {
+  background-color: black !important;
+  color: white !important;
+  border-radius: 6px;
+  margin-right: 5px;
+  margin-bottom: 5px;
+}
+
+thead {
+  margin-left: 5px !important;
+}
+
+td {
+  background-color: white !important;
+  color: black !important;
+}
+
+input {
+  max-width: 400px;
+}
