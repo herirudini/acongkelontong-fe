@@ -6,11 +6,11 @@ import { Product } from 'src/app/_models/Product';
 import { AuthService } from 'src/app/_services/auth.service';
 import { InventoryService } from 'src/app/_services/inventory.service';
 @Component({
-  selector: 'app-product-list',
-  templateUrl: './product-list.component.html',
-  styleUrls: ['./product-list.component.css'],
+  selector: 'app-product-list-inventory',
+  templateUrl: './product-list-inventory.component.html',
+  styleUrls: ['./product-list-inventory.component.css'],
 })
-export class ProductListComponent implements OnInit {
+export class ProductListInventoryComponent implements OnInit {
   title = 'Custom Search';
   searchText: any;
   Product!: Product[];
