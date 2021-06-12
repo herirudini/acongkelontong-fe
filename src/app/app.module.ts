@@ -24,7 +24,6 @@ import { SuplierDetailsComponent } from './_components/inventory/suplier-details
 import { CashierComponent } from './_components/cashier/cashier.component';
 import { AuthService } from './_services/auth.service';
 import { AuthInterceptor } from './_services/auth.interceptor';
-import { ProductListComponent } from './_components/shared/product-list/product-list.component';
 import { CashflowComponent } from './_components/owner/cashflow/cashflow.component';
 import { ResetPasswordComponent } from './_components/login/reset-password/reset-password.component';
 import { DeliveryOrderComponent } from './_components/inventory/delivery-order/delivery-order.component';
@@ -36,6 +35,10 @@ import { PurchaseFormComponent } from './_components/inventory/purchase-form/pur
 import { HomeComponent } from './_components/home/home.component';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { FormAddToCartComponent } from './_components/cashier/form-add-to-cart/form-add-to-cart.component';
+import { ProductListInventoryComponent } from './_components/inventory/product-list-inventory/product-list-inventory.component';
+import { ProductListCashierComponent } from './_components/cashier/product-list-cashier/product-list-cashier.component';
+import { ProductListComponent } from './_components/shared/product-list/product-list.component';
+import { NavbarComponent } from './_components/shared/navbar/navbar.component';
 
 @NgModule({
   declarations: [
@@ -55,7 +58,6 @@ import { FormAddToCartComponent } from './_components/cashier/form-add-to-cart/f
     CreateUserComponent,
     SuplierDetailsComponent,
     CashierComponent,
-    ProductListComponent,
     CashflowComponent,
     ResetPasswordComponent,
     DeliveryOrderComponent,
@@ -65,7 +67,11 @@ import { FormAddToCartComponent } from './_components/cashier/form-add-to-cart/f
     CartComponent,
     PurchaseFormComponent,
     HomeComponent,
-    FormAddToCartComponent
+    FormAddToCartComponent,
+    ProductListComponent,
+    ProductListInventoryComponent,
+    ProductListCashierComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,

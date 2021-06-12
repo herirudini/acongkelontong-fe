@@ -10,7 +10,13 @@ const apiURL: string = environment.ApiUrl;
 })
 export class CashierService {
   constructor(private http: HttpClient) {}
-
+  getAllActiveProduct() {
+    return this.http.get<any>(`${apiURL}/cashier/product`).pipe(
+      map((res) => {
+        return res.data || {};
+      })
+    );
+  }
   addToCart(data: any) {
     return this.http.post<any>(`${apiURL}/cashier/product`, data);
   }
