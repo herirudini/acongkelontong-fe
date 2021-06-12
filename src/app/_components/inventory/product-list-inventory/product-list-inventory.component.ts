@@ -34,6 +34,7 @@ export class ProductListInventoryComponent implements OnInit {
   activate(id: string, status: string) {
     const params = id
     const data: object = { status: status }
+    console.log("datastatus:", data)
     this.UpdateStatusSubcription = this.inventoryService
       .UpdateStatus(params, data) //status = "inactive"
       .subscribe((response: any) => {
@@ -52,6 +53,7 @@ export class ProductListInventoryComponent implements OnInit {
   deactivate(id: string, status: string) {
     const params = id
     const data: object = { status: status }
+    console.log("datastatus:", data)
     this.UpdateStatusSubcription = this.inventoryService
       .UpdateStatus(params, data) //status = "active"
       .subscribe((response: any) => {
