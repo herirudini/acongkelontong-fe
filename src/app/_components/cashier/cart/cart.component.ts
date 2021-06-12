@@ -3,75 +3,42 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { Cart } from 'src/app/_models/Cart';
 import { CashierService } from 'src/app/_services/cashier.service';
-import { Receipt } from 'src/app/_models/Receipt';
-import { Product } from 'src/app/_models/Product';
 
 @Component({
   selector: 'app-cart',
   templateUrl: './cart.component.html',
   styleUrls: ['./cart.component.css'],
 })
-export class CartComponent implements OnInit {
-  title = 'Custom Search';
-  searchText: any;
-  Product!: Product[];
+export class CartComponent implements OnInit, OnDestroy {
   listCart!: Cart[];
-  addToCartForm!: FormGroup;
   cancelForm!: FormGroup;
-  // cartId: any;
-  receiptData?: Receipt;
+  _id: any;
+  cartId: any;
+  data: any;
 
-  // private cartListSub = new Subscription();
+  private cartListSub = new Subscription();
 
   constructor(
     private cashierService: CashierService,
     private formBuilder: FormBuilder
-  ) { }
+  ) {}
 
   ngOnInit(): void {
-    console.log("masuk on init")
-    this.cashierService.getAllActiveProduct().subscribe((response: any) => {
-      console.log("masuk subscribe all product", response)
-      this.Product = response;
+    this.cartListSub = this.cashierService.getListCart().subscribe((Cart) => {
+      this.listCart = Cart;
     });
-    this.cashierService.getListCart().subscribe((response: any) => {
-      console.log("masuk subscribe list cart", response)
-      this.listCart = response;
-    });
-    this.addToCartForm = this.formBuilder.group({
-      barcode: [''],
-      quantity: [''],
-    });
+
     this.cancelForm = this.formBuilder.group({
       notes: [null, [Validators.required]],
     });
-    this.Product;
-    this.listCart;
-    this.receiptData;
   }
-  // addToCartSub = new Subscription();
-  onSubmit() {
-    this.cashierService
-      .addToCart(this.addToCartForm.value)
-      .subscribe(
-        (response: any) => {
-          console.log(response);
-          this.ngOnInit();
-          // window.location.reload();
-        },
-        (err) => {
-          console.log(err);
-          alert('Produk gagal ditmabahkan ke keranjang');
-        }
-      );
-  }
+
   onCancel(cartId: any) {
     console.log(this.cancelForm.value);
     this.cashierService.cancelCart(cartId, this.cancelForm.value).subscribe(
       (response: any) => {
         console.log(response);
-        this.ngOnInit();
-        // window.location.reload();
+        window.location.reload();
       },
       (err) => {
         console.log(err);
@@ -81,12 +48,11 @@ export class CartComponent implements OnInit {
   }
 
   onCheckOut() {
-    this.cashierService.checkOut("admin").subscribe(
+    this.cashierService.checkOut(this.data).subscribe(
       (response: any) => {
-        this.receiptData = response.data
         console.log(response.data.items);
-        this.ngOnInit();
-        // window.location.reload();
+        console.log(response.data._id);
+        window.location.reload();
       },
       (err) => {
         console.log(err);
@@ -95,12 +61,7 @@ export class CartComponent implements OnInit {
     );
   }
 
-  // ngOnDestroy() {
-  //   this.cartListSub.unsubscribe();
-  //   this.addToCartSub.unsubscribe();
-  // }
+  ngOnDestroy() {
+    this.cartListSub.unsubscribe();
+  }
 }
-
-
-//tombol cancel ada di dalam list cart
-//perkiraan total price dan total tax lakukan disini

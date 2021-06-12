@@ -1,13 +1,5 @@
-export interface Receipt {
-  _id: string;
-  items: [
-    {
-      product: string;
-      quantity: number;
-      price: number;
-      totalPrice: number;
-    }
-  ];
+export interface IReceipt {
+  items: object[];
   totalTax: number;
   subtotal: number;
   date: any;

@@ -1,25 +1,3 @@
-section.cart {
-  border: 2px solid black;
-  border-radius: 5px;
-  padding-top: 10px;
-}
-
-section.cart div.content-header {
-  margin-top: -10px;
-  background-color: black;
-  color: white;
-}
-
-thead {
-  background-color: black;
-  color: white;
-}
-
-form.form-cancel {
-  padding: 20px;
-}
-
-/* ======== */
 .receipt-content .logo a:hover {
   text-decoration: none;
   color: #7793c4;
@@ -65,7 +43,9 @@ form.form-cancel {
 
 .receipt-content {
   background: #eceef4;
+  width: 900px;
 }
+
 @media (min-width: 1200px) {
   .receipt-content .container {
     width: 900px;
