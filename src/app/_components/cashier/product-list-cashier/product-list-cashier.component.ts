@@ -21,7 +21,7 @@ export class ProductListCashierComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.cahierService.getAllProduct().subscribe((Product) => {
+    this.cahierService.getAllActiveProduct().subscribe((Product) => {
       this.Product = Product;
     });
   }

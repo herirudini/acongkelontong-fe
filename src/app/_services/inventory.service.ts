@@ -34,8 +34,7 @@ export class InventoryService {
   addDeliveryOrder(data: any) {
     return this.http.post<any>(`${apiURL}/inventory/delivery-order`, data);
   }
-
-  getProduct() {
+  getAllProduct() {
     return this.http.get<any>(`${apiURL}/inventory/product`).pipe(
       map((res) => {
         return res.data || {};

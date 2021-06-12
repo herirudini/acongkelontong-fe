@@ -10,7 +10,7 @@ const apiURL: string = environment.ApiUrl;
 })
 export class CashierService {
   constructor(private http: HttpClient) {}
-  getAllProduct() {
+  getAllActiveProduct() {
     return this.http.get<any>(`${apiURL}/cashier/product`).pipe(
       map((res) => {
         return res.data || {};
