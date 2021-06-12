@@ -38,6 +38,7 @@ import { FormAddToCartComponent } from './_components/cashier/form-add-to-cart/f
 import { ProductListInventoryComponent } from './_components/inventory/product-list-inventory/product-list-inventory.component';
 import { ProductListCashierComponent } from './_components/cashier/product-list-cashier/product-list-cashier.component';
 import { ProductListComponent } from './_components/shared/product-list/product-list.component';
+import { NavbarComponent } from './_components/shared/navbar/navbar.component';
 
 @NgModule({
   declarations: [
@@ -69,7 +70,8 @@ import { ProductListComponent } from './_components/shared/product-list/product-
     FormAddToCartComponent,
     ProductListComponent,
     ProductListInventoryComponent,
-    ProductListCashierComponent
+    ProductListCashierComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,
