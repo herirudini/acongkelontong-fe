@@ -42,9 +42,14 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a class="nav-link">
+                <a
+                  type="button"
+                  class="nav-link"
+                  data-toggle="modal"
+                  data-target=".bd-example-modal-lg"
+                >
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Create Order</p>
+                  <p>Receipt</p>
                 </a>
               </li>
             </ul>
@@ -59,7 +64,6 @@
       <div class="container-fluid">
         <app-product-list-cashier></app-product-list-cashier>
         <app-cart></app-cart>
-        <app-receipt></app-receipt>
       </div>
     </section>
   </div>
@@ -72,4 +76,16 @@
     All rights reserved.
     <div class="float-right d-none d-sm-inline-block"><b>Version</b> 3.1.0</div>
   </footer>
+</div>
+
+<div
+  class="modal fade bd-example-modal-lg"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="myLargeModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content"><app-receipt></app-receipt></div>
+  </div>
 </div>

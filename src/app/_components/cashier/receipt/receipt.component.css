@@ -43,7 +43,9 @@
 
 .receipt-content {
   background: #eceef4;
+  width: 900px;
 }
+
 @media (min-width: 1200px) {
   .receipt-content .container {
     width: 900px;
