@@ -19,15 +19,14 @@ table {
   margin-bottom: 5px;
 }
 
-thead {
-  margin-left: 5px !important;
-}
-
 td {
   background-color: white !important;
   color: black !important;
 }
 
-input {
+input.search {
   max-width: 400px;
+  margin-left: 10px;
+  margin-bottom: 5px;
+  border-radius: 10px;
 }
