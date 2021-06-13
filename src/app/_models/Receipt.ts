@@ -1,6 +1,14 @@
 export interface Receipt {
-    items: object[],
-    totalTax: number,
-    subtotal: number,
-    date: any,
+  _id: string;
+  items: [
+    {
+      product: string;
+      quantity: number;
+      price: number;
+      totalPrice: number;
+    }
+  ];
+  totalTax: number;
+  subtotal: number;
+  date: any;
 }

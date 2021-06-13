@@ -2,9 +2,10 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { CommonModule } from '@angular/common';
-
+import { NgxPrintModule } from 'ngx-print'
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+
 import { SharedComponent } from './_components/shared/shared.component';
 import { UserComponent } from './_components/user/user.component';
 import { OwnerComponent } from './_components/owner/owner.component';
@@ -29,14 +30,14 @@ import { ResetPasswordComponent } from './_components/login/reset-password/reset
 import { DeliveryOrderComponent } from './_components/inventory/delivery-order/delivery-order.component';
 import { IncomeComponent } from './_components/finance/income/income.component';
 import { OutcomeComponent } from './_components/finance/outcome/outcome.component';
-import { ReceiptComponent } from './_components/cashier/receipt/receipt.component';
+// import { ReceiptComponent } from './_components/cashier/receipt/receipt.component';
 import { CartComponent } from './_components/cashier/cart/cart.component';
 import { PurchaseFormComponent } from './_components/inventory/purchase-form/purchase-form.component';
 import { HomeComponent } from './_components/home/home.component';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
-import { FormAddToCartComponent } from './_components/cashier/form-add-to-cart/form-add-to-cart.component';
+// import { FormAddToCartComponent } from './_components/cashier/form-add-to-cart/form-add-to-cart.component';
 import { ProductListInventoryComponent } from './_components/inventory/product-list-inventory/product-list-inventory.component';
-import { ProductListCashierComponent } from './_components/cashier/product-list-cashier/product-list-cashier.component';
+// import { ProductListCashierComponent } from './_components/cashier/product-list-cashier/product-list-cashier.component';
 import { ProductListComponent } from './_components/shared/product-list/product-list.component';
 import { NavbarComponent } from './_components/shared/navbar/navbar.component';
 
@@ -63,14 +64,14 @@ import { NavbarComponent } from './_components/shared/navbar/navbar.component';
     DeliveryOrderComponent,
     IncomeComponent,
     OutcomeComponent,
-    ReceiptComponent,
+    // ReceiptComponent,
     CartComponent,
     PurchaseFormComponent,
     HomeComponent,
-    FormAddToCartComponent,
+    // FormAddToCartComponent,
     ProductListComponent,
     ProductListInventoryComponent,
-    ProductListCashierComponent,
+    // ProductListCashierComponent,
     NavbarComponent
   ],
   imports: [
@@ -80,7 +81,8 @@ import { NavbarComponent } from './_components/shared/navbar/navbar.component';
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    Ng2SearchPipeModule
+    Ng2SearchPipeModule,
+    NgxPrintModule
   ],
   providers: [
     AuthService,
@@ -88,4 +90,4 @@ import { NavbarComponent } from './_components/shared/navbar/navbar.component';
   ],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule { }
