@@ -22,4 +22,11 @@ export class FinanceService {
   GetOutcome(data: any) {
     return this.http.put(`${apiURL}/finance/outcome`, data);
   }
+  GetIncome(data: any) {
+    return this.http.put(`${apiURL}/finance/income`, data);
+  }
+  UpdateInvoice(params: string, data: any): any {
+    
+    return this.http.patch(`${apiURL}/invoice/suplier/${params}`, data);
+  }
 }

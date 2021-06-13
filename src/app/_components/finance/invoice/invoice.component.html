@@ -9,6 +9,7 @@
         <th scope="col">Supplier Name</th>
         <th scope="col">Bill</th>
         <th scope="col">Status</th>
+        <th scope="col">Action</th>
       </tr>
     </thead>
     <tbody>
@@ -16,11 +17,23 @@
         <td>{{ invoice._id }}</td>
         <td>{{ invoice.suplier_name }}</td>
         <td>{{ invoice.bill | currency: "IDR" }}</td>
-        <td>{{ invoice.status }}
-          <a class="btn btn-info btn-sm" href="#">
-            <i class="fas fa-pencil-alt"> </i>
-            Edit
-          </a></td>
+        <td>{{ invoice.status }}</td>
+        <td class="action">
+          <button
+            *ngIf="invoice.status === 'unpaid'"
+            class="btn btn-outline-primary"
+            (click)="activate(invoice.id)"
+          >
+           Paid
+          </button>
+          <button
+            *ngIf="invoice.status === 'paid'"
+            class="btn btn-outline-warning"
+            (click)="deactivate(invoice.id)"
+          >
+            Unpaid
+          </button>
+        </td>
       </tr>
     </tbody>
   </table>

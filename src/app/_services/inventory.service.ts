@@ -12,11 +12,7 @@ import { Router } from '@angular/router';
   providedIn: 'root',
 })
 export class InventoryService {
-<<<<<<< HEAD
-  constructor(private http: HttpClient, private router: Router) {}
-=======
   constructor(private http: HttpClient, private router: Router) { }
->>>>>>> 4b1ba3d070fd69dc4031e4a310f56c1743a2ac62
   addSuplier(data: any) {
     console.log('ok2');
     console.log(data);
