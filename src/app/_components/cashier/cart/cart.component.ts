@@ -21,11 +21,7 @@ export class CartComponent implements OnInit {
   countTax?: number;
   countTotalPrice?: number;
   date: any;
-  showDate: any;
-  showTime: any;
   receiptData?: Receipt;
-
-  // private cartListSub = new Subscription();
 
   constructor(
     private cashierService: CashierService,
@@ -33,18 +29,9 @@ export class CartComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.date = Date.now;
-    this.showDate = this.date.getMonth + "/" + this.date.getDate + "/" + this.date.getFullYear;
-    this.showTime = this.date.getHours + ":" + this.date.getMinutes;
-    console.log("masuk on init")
-    this.cashierService.getAllActiveProduct().subscribe((response: any) => {
-      console.log("masuk subscribe all product", response)
-      this.Product = response;
-    });
-    this.cashierService.getListCart().subscribe((response: any) => {
-      console.log("masuk subscribe list cart", response)
-      this.listCart = response;
-    });
+    this.date = new Date;
+    this.initListCart()
+    this.initListProduct()
     this.addToCartForm = this.formBuilder.group({
       barcode: [''],
       quantity: [''],
@@ -52,26 +39,36 @@ export class CartComponent implements OnInit {
     this.cancelForm = this.formBuilder.group({
       notes: [null, [Validators.required]],
     });
-    this.Product;
-    this.listCart;
-    this.receiptData;
-
+  }
+  initListProduct() {
+    this.cashierService.getAllActiveProduct().subscribe((response: any) => {
+      console.log("masuk subscribe all product", response)
+      this.Product = response;
+    });
+  }
+  initListCart() {
     let hitungPajak = 0;
     let hitungTotalHarga = 0;
-    for (let i=0; i<this.listCart.length; i++) {
-      hitungPajak += this.listCart[i].tax
-      hitungTotalHarga += this.listCart[i].totalPrice
-    }
-    this.countTax = hitungPajak;
-    this.countTotalPrice = hitungTotalHarga;
+    this.cashierService.getListCart().subscribe((response: any) => {
+      console.log("masuk subscribe list cart", response)
+      this.listCart = response;
+      for (let i = 0; i < response.length; i++) {
+        hitungPajak += response[i].tax
+        hitungTotalHarga += response[i].totalPrice
+      }
+      this.countTax = hitungPajak;
+      this.countTotalPrice = hitungTotalHarga;
+      console.log("masuk hitungan")
+    });
   }
-  // addToCartSub = new Subscription();
+
   onSubmit() {
     this.cashierService
       .addToCart(this.addToCartForm.value)
       .subscribe(
         (response: any) => {
           console.log(response);
+          this.initListCart()
           this.ngOnInit();
           // window.location.reload();
         },
@@ -86,6 +83,7 @@ export class CartComponent implements OnInit {
     this.cashierService.cancelCart(cartId, this.cancelForm.value).subscribe(
       (response: any) => {
         console.log(response);
+        this.initListCart()
         this.ngOnInit();
         // window.location.reload();
       },

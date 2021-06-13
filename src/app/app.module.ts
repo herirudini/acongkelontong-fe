@@ -2,9 +2,10 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { CommonModule } from '@angular/common';
-
+import { NgxPrintModule } from 'ngx-print'
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+
 import { SharedComponent } from './_components/shared/shared.component';
 import { UserComponent } from './_components/user/user.component';
 import { OwnerComponent } from './_components/owner/owner.component';
@@ -80,7 +81,8 @@ import { NavbarComponent } from './_components/shared/navbar/navbar.component';
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    Ng2SearchPipeModule
+    Ng2SearchPipeModule,
+    NgxPrintModule
   ],
   providers: [
     AuthService,
@@ -88,4 +90,4 @@ import { NavbarComponent } from './_components/shared/navbar/navbar.component';
   ],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule { }
