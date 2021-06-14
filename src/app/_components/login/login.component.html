@@ -34,15 +34,16 @@
               </div>
             </div>
           </div>
-          <small class="invalid"
-            >Kombinasi email dan password yang Anda masukan salah</small
-          >
+          <div class="action">
+            <small *ngIf="!loginForm.controls['email'].valid" class="invalid">Masukan valid email dan password</small>
+            <!-- <small *ngIf="!loginForm.valid" class="invalid">Masukan valid email</small> -->
+          </div>
           <!-- <small class="invalid">Isi semua data terlebih dahulu</small> -->
 
           <div class="row">
             <div class="col-8"></div>
             <div class="col-4">
-              <button type="submit" class="btn btn-primary btn-block">
+              <button type="submit" class="btn btn-primary btn-block" [disabled]="!loginForm.valid">
                 Login
               </button>
             </div>
