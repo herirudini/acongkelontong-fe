@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { AuthService } from 'src/app/_services/auth.service';
 
 @Component({
@@ -7,11 +8,9 @@ import { AuthService } from 'src/app/_services/auth.service';
   styleUrls: ['./owner.component.css'],
 })
 export class OwnerComponent implements OnInit {
-  constructor(private authService: AuthService) {}
+  constructor(private router: Router) {}
 
-  ngOnInit(): void {}
-
-  logout() {
-    this.authService.logout();
+  ngOnInit(): void {
+    this.router.navigate(['/owner/employee'])
   }
 }

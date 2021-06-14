@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from 'src/app/_services/auth.service';
+import { ActivatedRouteSnapshot, Router } from '@angular/router';
 
 @Component({
   selector: 'app-inventory',
@@ -7,11 +7,9 @@ import { AuthService } from 'src/app/_services/auth.service';
   styleUrls: ['./inventory.component.css'],
 })
 export class InventoryComponent implements OnInit {
-  constructor(private authService: AuthService) {}
+  constructor(private router: Router) {}
 
-  ngOnInit(): void {}
-
-  logout() {
-    this.authService.logout();
+  ngOnInit(): void {
+    this.router.navigate(['/inventory/product'])
   }
 }
