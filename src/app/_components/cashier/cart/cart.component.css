@@ -66,6 +66,8 @@ form.form-cancel {
 
 .receipt-content {
   background: #eceef4;
+  width: 950px;
+  margin-top: -40px;
 }
 @media (min-width: 1200px) {
   .receipt-content .container {
