@@ -41,6 +41,7 @@ import { ProductListInventoryComponent } from './_components/inventory/product-l
 import { ProductListComponent } from './_components/shared/product-list/product-list.component';
 import { NavbarComponent } from './_components/shared/navbar/navbar.component';
 import { ListuserComponent } from './_components/owner/listuser/listuser.component';
+import { InvoiceDetailComponent } from './_components/finance/invoice/invoice-detail/invoice-detail.component';
 
 @NgModule({
   declarations: [
@@ -74,7 +75,8 @@ import { ListuserComponent } from './_components/owner/listuser/listuser.compone
     ProductListInventoryComponent,
     // ProductListCashierComponent,
     NavbarComponent,
-    ListuserComponent
+    ListuserComponent,
+    InvoiceDetailComponent
   ],
   imports: [
     BrowserModule,
