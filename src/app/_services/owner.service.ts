@@ -23,7 +23,7 @@ export class OwnerService {
     );
   }
   GetTopProduct(data: any) {
-    return this.http.get(`${apiURL}/owner/top-product`, data);
+    return this.http.put(`${apiURL}/owner/top-product`, data);
 }
 }
 

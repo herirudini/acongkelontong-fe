@@ -1,5 +1,5 @@
 <div class="invoice">
-  <h4>Outcome</h4>
+  <h4>Top Ten Product</h4>
   <br /><br />
   <div class="card-body p-0">
     <form [formGroup]="topTenForm" (ngSubmit)="onSubmit()">
@@ -39,7 +39,7 @@
           <tbody>
             <tr *ngFor="let top of topTen">
               <td>{{ top._id }}</td>
-              <td>{{ top.suplier_name }}</td>
+              <td>{{ top.total }}</td>
               
             </tr>
           </tbody>
