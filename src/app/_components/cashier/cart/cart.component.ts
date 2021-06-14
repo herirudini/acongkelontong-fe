@@ -22,16 +22,17 @@ export class CartComponent implements OnInit {
   countTotalPrice?: number;
   date: any;
   receiptData?: Receipt;
+  isAlert = false;
 
   constructor(
     private cashierService: CashierService,
     private formBuilder: FormBuilder
-  ) { }
+  ) {}
 
   ngOnInit(): void {
-    this.date = new Date;
-    this.initListCart()
-    this.initListProduct()
+    this.date = new Date();
+    this.initListCart();
+    this.initListProduct();
     this.addToCartForm = this.formBuilder.group({
       barcode: [''],
       quantity: [''],
@@ -42,48 +43,52 @@ export class CartComponent implements OnInit {
   }
   initListProduct() {
     this.cashierService.getAllActiveProduct().subscribe((response: any) => {
-      console.log("masuk subscribe all product", response)
+      console.log('masuk subscribe all product', response);
       this.Product = response;
+      for (let i = 0; i < response.length; i++) {
+        console.log(response[i].stock);
+        if (response[i].stock < 10) {
+          this.isAlert = true;
+        }
+      }
     });
   }
   initListCart() {
     let hitungPajak = 0;
     let hitungTotalHarga = 0;
     this.cashierService.getListCart().subscribe((response: any) => {
-      console.log("masuk subscribe list cart", response)
+      console.log('masuk subscribe list cart', response);
       this.listCart = response;
       for (let i = 0; i < response.length; i++) {
-        hitungPajak += response[i].tax
-        hitungTotalHarga += response[i].totalPrice
+        hitungPajak += response[i].tax;
+        hitungTotalHarga += response[i].totalPrice;
       }
       this.countTax = hitungPajak;
       this.countTotalPrice = hitungTotalHarga;
-      console.log("masuk hitungan")
+      console.log('masuk hitungan');
     });
   }
 
   onSubmit() {
-    this.cashierService
-      .addToCart(this.addToCartForm.value)
-      .subscribe(
-        (response: any) => {
-          console.log(response);
-          this.initListCart()
-          this.ngOnInit();
-          // window.location.reload();
-        },
-        (err) => {
-          console.log(err);
-          alert('Produk gagal ditmabahkan ke keranjang');
-        }
-      );
+    this.cashierService.addToCart(this.addToCartForm.value).subscribe(
+      (response: any) => {
+        console.log(response);
+        this.initListCart();
+        this.ngOnInit();
+        // window.location.reload();
+      },
+      (err) => {
+        console.log(err);
+        alert('Produk gagal ditmabahkan ke keranjang');
+      }
+    );
   }
   onCancel(cartId: any) {
     console.log(this.cancelForm.value);
     this.cashierService.cancelCart(cartId, this.cancelForm.value).subscribe(
       (response: any) => {
         console.log(response);
-        this.initListCart()
+        this.initListCart();
         this.ngOnInit();
         // window.location.reload();
       },
@@ -95,9 +100,9 @@ export class CartComponent implements OnInit {
   }
 
   onCheckOut() {
-    this.cashierService.checkOut("admin").subscribe(
+    this.cashierService.checkOut('admin').subscribe(
       (response: any) => {
-        this.receiptData = response.data
+        this.receiptData = response.data;
         console.log(response.data.items);
         this.ngOnInit();
         // window.location.reload();
@@ -114,7 +119,6 @@ export class CartComponent implements OnInit {
   //   this.addToCartSub.unsubscribe();
   // }
 }
-
 
 //tombol cancel ada di dalam list cart
 //perkiraan total price dan total tax lakukan disini

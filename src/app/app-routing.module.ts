@@ -11,6 +11,7 @@ import { ForgetPasswordComponent } from './_components/login/forget-password/for
 import { ResetPasswordComponent } from './_components/login/reset-password/reset-password.component';
 import { HomeComponent } from './_components/home/home.component';
 import { OutcomeComponent } from './_components/finance/outcome/outcome.component';
+import { InvoiceDetailComponent } from './_components/finance/invoice/invoice-detail/invoice-detail.component';
 
 const routes: Routes = [
   {
@@ -49,6 +50,10 @@ const routes: Routes = [
   {
     path: 'finance/outcome',
     component: OutcomeComponent,
+  },
+  {
+    path: 'finance/invoice/:invoice_id',
+    component: InvoiceDetailComponent,
   },
   {
     path: 'home',

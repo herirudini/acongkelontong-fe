@@ -13,18 +13,7 @@
     </a>
 
     <div class="sidebar">
-      <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-        <div class="image">
-          <img
-            src="assets/user2-160x160.jpg"
-            class="img-circle elevation-2"
-            alt="User Image"
-          />
-        </div>
-        <div class="info">
-          <a class="d-block">Alexander Pierce</a>
-        </div>
-      </div>
+      <app-user></app-user>
 
       <nav class="mt-2">
         <ul
@@ -45,7 +34,15 @@
               <li class="nav-item">
                 <a class="nav-link" routerLink="/owner/register">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>CREATE EMPLOYEE</p>
+                  <p>EMPLOYEE (create employee, list employee)</p>
+                </a>
+                <a class="nav-link" routerLink="/owner/register">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>TOP PRODUCT (top product by range)</p>
+                </a>
+                <a class="nav-link" routerLink="/owner/register">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>CASHFLOW (cashflow table)</p>
                 </a>
               </li>
             </ul>

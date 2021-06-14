@@ -7,7 +7,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
 import { SharedComponent } from './_components/shared/shared.component';
-import { UserComponent } from './_components/user/user.component';
+import { UserComponent } from './_components/shared/user/user.component';
 import { OwnerComponent } from './_components/owner/owner.component';
 import { LoginComponent } from './_components/login/login.component';
 import { ForgetPasswordComponent } from './_components/login/forget-password/forget-password.component';
@@ -38,9 +38,10 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
 // import { FormAddToCartComponent } from './_components/cashier/form-add-to-cart/form-add-to-cart.component';
 import { ProductListInventoryComponent } from './_components/inventory/product-list-inventory/product-list-inventory.component';
 // import { ProductListCashierComponent } from './_components/cashier/product-list-cashier/product-list-cashier.component';
-import { ProductListComponent } from './_components/shared/product-list/product-list.component';
 import { NavbarComponent } from './_components/shared/navbar/navbar.component';
 import { ListuserComponent } from './_components/owner/listuser/listuser.component';
+import { InvoiceDetailComponent } from './_components/finance/invoice/invoice-detail/invoice-detail.component';
+import { EditUserComponent } from './_components/shared/user/edit-user/edit-user.component';
 
 @NgModule({
   declarations: [
@@ -70,11 +71,12 @@ import { ListuserComponent } from './_components/owner/listuser/listuser.compone
     PurchaseFormComponent,
     HomeComponent,
     // FormAddToCartComponent,
-    ProductListComponent,
     ProductListInventoryComponent,
     // ProductListCashierComponent,
     NavbarComponent,
-    ListuserComponent
+    ListuserComponent,
+    InvoiceDetailComponent,
+    EditUserComponent
   ],
   imports: [
     BrowserModule,
