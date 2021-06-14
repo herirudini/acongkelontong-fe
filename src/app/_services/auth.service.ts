@@ -27,6 +27,12 @@ export class AuthService {
   getUserRole() {
     return localStorage.getItem('role');
   }
+  getUserName() {
+    return localStorage.getItem('username');
+  }
+  getUserId() {
+    return localStorage.getItem('user_id');
+  }
   getIsLogin() {
     const token = this.getToken();
     if (token == null) {

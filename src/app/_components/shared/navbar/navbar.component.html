@@ -17,8 +17,8 @@
           <button class="dropdown-item" type="button" (click)="logout()">
             Logout
           </button>
-          <button class="dropdown-item" type="button">Edit Profile</button>
-          <button class="dropdown-item" type="button">Edit Password</button>
+          <button class="dropdown-item" type="button" [routerLink]="['/user/edit-mail-username']">Edit Profile</button>
+          <button class="dropdown-item" type="button" [routerLink]="['/user/change-password']">Edit Password</button>
         </div>
       </div>
     </li>
