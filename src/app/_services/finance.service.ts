@@ -19,11 +19,17 @@ export class FinanceService {
       })
     );
   }
+  getInvoiceDetail(id: any){
+    return this.http.get<any>(`${apiURL}/finance/invoice/${id}`)
+  }
+  setStatusInvoice(id: any){
+    return this.http.patch<any>(`${apiURL}/finance/invoice/${id}`, id)
+  }
   GetOutcome(data: any) {
     return this.http.put(`${apiURL}/finance/outcome`, data);
   }
   GetIncome(data: any) {
-    return this.http.put(`${apiURL}/finance/income`, data);
+    return this.http.put(`${apiURL}/finance/income`, JSON.stringify(data));
   }
   UpdateInvoice(params: string, data: any): any {
     
