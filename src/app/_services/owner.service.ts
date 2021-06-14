@@ -22,5 +22,8 @@ export class OwnerService {
       })
     );
   }
+  GetTopProduct(data: any) {
+    return this.http.get(`${apiURL}/owner/top-product`, data);
+}
 }
 
