@@ -37,7 +37,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let top of topTen">
+            <tr *ngFor="let top of topTen.slice(0, 10)">
               <td>{{ top._id }}</td>
               <td>{{ top.total }}</td>
               
