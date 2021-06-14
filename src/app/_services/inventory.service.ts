@@ -43,6 +43,12 @@ export class InventoryService {
       })
     );
   }
+  listAllBrand() {
+    return this.http.get(`${apiURL}/inventory/listBrand`)
+  }
+  getProductByBrand(data: any) {
+    return this.http.put(`${apiURL}/inventory/product/byBrand`, data)
+  }
   UpdateStatus(params: string, data: any): any {
     return this.http.patch(`${apiURL}/inventory/product/status/${params}`, data)
     //   .subscribe((response: any) => {

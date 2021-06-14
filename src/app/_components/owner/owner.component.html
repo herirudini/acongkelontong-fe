@@ -2,54 +2,7 @@
   <app-navbar></app-navbar>
 
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
-    <a class="brand-link">
-      <img
-        src="assets/AdminLTELogo.png"
-        alt="AdminLTE Logo"
-        class="brand-image img-circle elevation-3"
-        style="opacity: 0.8"
-      />
-      <span class="brand-text font-weight-light">Owner</span>
-    </a>
-
-    <div class="sidebar">
-      <app-user></app-user>
-
-      <nav class="mt-2">
-        <ul
-          class="nav nav-pills nav-sidebar flex-column"
-          data-widget="treeview"
-          role="menu"
-          data-accordion="false"
-        >
-          <li class="nav-item menu-open">
-            <a class="nav-link">
-              <i class="nav-icon fas fa-edit"></i>
-              <p>
-                TO DO
-                <i class="right fas fa-angle-left"></i>
-              </p>
-            </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a class="nav-link" routerLink="/owner/register">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>EMPLOYEE (create employee, list employee)</p>
-                </a>
-                <a class="nav-link" routerLink="/owner/register">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>TOP PRODUCT (top product by range)</p>
-                </a>
-                <a class="nav-link" routerLink="/owner/register">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>CASHFLOW (cashflow table)</p>
-                </a>
-              </li>
-            </ul>
-          </li>
-        </ul>
-      </nav>
-    </div>
+    <app-sidebar></app-sidebar>
   </aside>
 
   <div class="content-wrapper">
