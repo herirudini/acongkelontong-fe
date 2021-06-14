@@ -25,7 +25,8 @@ form.form-cancel {
   color: #7793c4;
 }
 
-.receipt-content .invoice-wrapper {
+/* .receipt-content .invoice-wrapper, */
+.col-md-12.print {
   background: #fff;
   border: 1px solid #cdd3e2;
   box-shadow: 0px 0px 1px #ccc;
