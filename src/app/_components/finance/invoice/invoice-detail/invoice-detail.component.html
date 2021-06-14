@@ -16,21 +16,21 @@
                                 <span>Suplier</span>
                                 <strong>{{invoiceData?.suplier_name}}</strong>
                             </div>
+                            <div class="col-sm-6">
+                                <span>Status</span>
+                                <strong>{{invoiceData?.status}}</strong>
+                            </div>
                             <div class="action">
-                                <span>Suplier</span>
                                 <button *ngIf="invoiceData?.status === 'unpaid'" class="btn btn-outline-primary"
                                     (click)="paySuplier(invoiceData?._id)">
                                     Pay this orders
                                 </button>
-                                <strong *ngIf="invoiceData?.status === 'paid'" class="col-sm-6">
-                                    Paid
-                                </strong>
-                                <div class="col-sm-6 text-right">
-                                    <span>Tanggal:</span>
-                                    <strong>{{invoiceData?.updatedAt | date: "shortDate"}} {{invoiceData?.updatedAt |
-                                        date:
-                                        "shortTime"}}</strong>
-                                </div>
+                            </div>
+                            <div class="col-sm-6 text-right">
+                                <span>Tanggal:</span>
+                                <strong>{{invoiceData?.updatedAt | date: "shortDate"}} {{invoiceData?.updatedAt |
+                                    date:
+                                    "shortTime"}}</strong>
                             </div>
                         </div>
 
