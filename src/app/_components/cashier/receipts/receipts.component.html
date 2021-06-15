@@ -1,27 +1,106 @@
 <div class="wrapper">
-    <app-navbar></app-navbar>
-    <aside class="main-sidebar sidebar-dark-primary elevation-4">
-      <app-sidebar></app-sidebar>
-    </aside>
-  
-    <div class="content-wrapper">
-      <section class="content">
-        <div class="container-fluid">
+  <app-navbar></app-navbar>
+  <aside class="main-sidebar sidebar-dark-primary elevation-4">
+    <app-sidebar></app-sidebar>
+  </aside>
 
-<!-- KODE UNTUK TABLE LIST ALL RECEIPTS -->
-<p> <b>ALL RECEIPTS</b> </p>
+  <div class="content-wrapper">
+    <section class="content">
+      <div class="container-fluid">
+        <!-- KODE UNTUK TABLE LIST ALL RECEIPTS -->
+        <div class="receipt-content" *ngFor="let receipt of response">
+          <div class="container bootstrap snippets bootdey">
+            <div class="row">
+              <div class="col-md-12 print">
+                <div id="receipt" class="invoice-wrapper">
+                  <div class="intro mb-3">
+                    <strong>Acong Kelontong</strong>,
+                    <br />
+                    Jl. Sepanjang Jalan Kenangan No.123<br />
+                    Telepon: (022) 123-5432<br />
+                    Email: acong@kelontong.com
+                  </div>
 
+                  <div class="payment-info">
+                    <div class="row mb-3">
+                      <div class="col-12">
+                        <small
+                          >Date : {{ receipt.date | date: "shortDate" }}</small
+                        >
+                      </div>
+                      <div class="col-12">
+                        <small
+                          >Time : {{ receipt.date | date: "shortTime" }}</small
+                        >
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="line-items">
+                    <div class="headers clearfix">
+                      <div class="row">
+                        <div class="col-xs-3">Produk</div>
+                        <div class="col-xs-2">Quantity</div>
+                        <div class="col-xs-3">Harga</div>
+                        <div class="col-xs-4 text-right">Amount</div>
+                      </div>
+                    </div>
+                    <div class="items">
+                      <div
+                        class="row item"
+                        *ngFor="let product of receipt.items"
+                      >
+                        <div class="col-xs-3 desc">{{ product.product }}</div>
+                        <div class="col-xs-2 qty">{{ product.quantity }}</div>
+                        <div class="col-xs-3 qty">{{ product.price }}</div>
+                        <div class="col-xs-4 amount text-right">
+                          {{ product.totalPrice }}
+                        </div>
+                      </div>
+                    </div>
+                    <div class="total text-right">
+                      <div class="field">
+                        Total Pajak (10%)
+                        <span>{{ receipt.totalTax }} </span>
+                      </div>
+                      <div class="field grand-total">
+                        Total Bayar
+                        <span>{{ receipt.subtotal }} </span>
+                      </div>
+                    </div>
+                    <p class="extra-notes">
+                      <strong>Notes :</strong>
+                      Terimakasih telah berbelanja di Toko kami
+                    </p>
+                  </div>
+                </div>
+                <div class="print">
+                  <button
+                    ngxPrint
+                    printSectionId="receipt"
+                    [useExistingCss]="true"
+                    style="border-radius: 5px"
+                  >
+                    <i class="fa fa-print"></i>
+                    Print this receipt
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-      </section>
-    </div>
-  
-    <footer class="main-footer">
-      <strong
-        >Copyright &copy; 2021
-        <a href="https://adminlte.io">Acong Kelontong</a>.</strong
-      >
-      All rights reserved.
-      <div class="float-right d-none d-sm-inline-block"><b>Version</b> 3.1.0</div>
-    </footer>
+
+        <!-- ================ -->
+      </div>
+    </section>
   </div>
-  
+
+  <footer class="main-footer">
+    <strong
+      >Copyright &copy; 2021
+      <a href="https://adminlte.io">Acong Kelontong</a>.</strong
+    >
+    All rights reserved.
+    <div class="float-right d-none d-sm-inline-block"><b>Version</b> 3.1.0</div>
+  </footer>
+</div>
