@@ -1,5 +1,5 @@
 import { Component, EventEmitter, OnInit, Output } from "@angular/core";
-import { FormControl, FormGroup, Validators } from "@angular/forms";
+import { FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms";
 import { AuthService } from "src/app/_services/auth.service";
 import Swal from "sweetalert2";
 
@@ -9,24 +9,26 @@ import Swal from "sweetalert2";
   styleUrls: ['./forget-password.component.css']
 })
 export class ForgetPasswordComponent implements OnInit {
-  @Output() inputEmail!: EventEmitter<{ email: string }>;
-  url: any;
+  url: any
   forgetPasswordForm!: FormGroup;
-  constructor(private authService: AuthService) {
-    this.inputEmail = new EventEmitter<{ email: string }>();
-  }
-  ngOnInit() {
+  constructor(
+    public formBuilder: FormBuilder,
+    public authServices: AuthService,
+  ) { }
+
+  ngOnInit(): void {
     this.url = location.origin + "/login/reset-password";
-    this.forgetPasswordForm = new FormGroup({
-      email: new FormControl(null, [Validators.required, Validators.email]),
+    this.forgetPasswordForm = this.formBuilder.group({
+      email: [null, [Validators.email]],
       originUrl: this.url
     });
   }
   onSubmit() {
-    this.authService.forgetPassword(this.forgetPasswordForm.value).subscribe((response: any) => {
+    this.authServices.forgetPassword(this.forgetPasswordForm.value).subscribe((response: any) => {
+      console.log(response)
       if (response.success) {
-        Swal.fire("Check your email!", response.message, "success");
+        Swal.fire("Success", response.message, response.data);
       }
-    })
+    });
   }
 }
