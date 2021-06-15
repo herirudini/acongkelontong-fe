@@ -1,26 +1,26 @@
 div.card.form-po {
-    border: 2px solid black;
-    border-radius: 6px;
-  }
-  
-  h2 {
-    font-weight: bolder;
-  }
-  
-section.content.purchase-order {
-    border: 2px solid black;
-    border-radius: 5px;
-    padding-top: 10px;
-}
-
-h4.modal-title {
-    font-weight: bold;
-}
-div.card.form-purchase-order {
-    border: 2px solid black;
-    border-radius: 6px;
+  border: 2px solid black;
+  border-radius: 6px;
 }
 
 h2 {
-    font-weight: 1000;
+  font-weight: bolder;
+}
+
+section.content.purchase-order {
+  border: 2px solid black;
+  border-radius: 5px;
+  padding-top: 10px;
+}
+
+h4.modal-title {
+  font-weight: bold;
+}
+div.card.form-purchase-order {
+  border: 2px solid black;
+  border-radius: 6px;
+}
+
+h2 {
+  font-weight: 1000;
 }
