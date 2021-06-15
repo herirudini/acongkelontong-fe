@@ -16,11 +16,9 @@ import { AuthService } from './auth.service';
 export class AuthGuard implements OnInit, CanActivate {
   arrayRouter!: any;
   routerRole!: any;
-  constructor(private authService: AuthService, private router: Router) { }
+  constructor(private authService: AuthService, private router: Router) {}
 
-  ngOnInit(): void {
-
-  }
+  ngOnInit(): void {}
   canActivate(
     actRoute: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
@@ -29,15 +27,15 @@ export class AuthGuard implements OnInit, CanActivate {
     | Promise<boolean | UrlTree>
     | boolean
     | UrlTree {
-    this.routerRole = actRoute.data[0]
+    this.routerRole = actRoute.data[0];
     const isLogin = this.authService.getIsLogin();
     const userRole = this.authService.getUserRole();
-    console.log(this.routerRole)
+    console.log(this.routerRole);
     if (isLogin == false) {
-      alert('login dulu bos!');
+      alert('login terlebih dahulu');
       this.router.navigate(['login']);
-    } else if (this.routerRole != userRole && userRole != "owner") {
-      alert('salah kamar!');
+    } else if (this.routerRole != userRole && userRole != 'owner') {
+      alert('unauthorized!');
       this.router.navigate([userRole]);
     }
     return true;
