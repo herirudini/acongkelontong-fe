@@ -9,7 +9,11 @@
       <div class="container-fluid">
         <div class="card product">
           <h4>Daftar Produk</h4>
-          <input [(ngModel)]="searchText" placeholder="Masukan Produk ID/Nama" class="search" />
+          <input
+            [(ngModel)]="searchText"
+            placeholder="Masukan Produk ID/Nama"
+            class="search"
+          />
           <div class="card-body p-0 row">
             <div class="col-12 col-lg-10">
               <div class="table-responsive">
@@ -30,7 +34,12 @@
                     <tr *ngFor="let product of Product | filter: searchText">
                       <td>{{ product.stock }}</td>
                       <td>
-                        <img [src]="product.image" alt="product image" width="100" height="100" />
+                        <img
+                          [src]="product.image"
+                          alt="product image"
+                          width="100"
+                          height="100"
+                        />
                       </td>
                       <td>{{ product.brand_name }}</td>
                       <td>{{ product.product_name }}</td>
@@ -58,16 +67,28 @@
                 <div class="card-body form-row">
                   <div class="form-group col-12 col-md-12">
                     <label for="inputBarcode">Barcode</label>
-                    <input type="text" formControlName="barcode" class="form-control" placeholder="Barcode" />
+                    <input
+                      type="text"
+                      formControlName="barcode"
+                      class="form-control"
+                      placeholder="Barcode"
+                    />
                   </div>
 
                   <div class="form-group col-12 col-md-12">
                     <label for="inputQuantity">Quantity</label>
-                    <input type="text" formControlName="quantity" class="form-control" placeholder="quantity" />
+                    <input
+                      type="text"
+                      formControlName="quantity"
+                      class="form-control"
+                      placeholder="quantity"
+                    />
                   </div>
                 </div>
                 <div class="col-12">
-                  <button type="submit" class="btn btn-dark">Add to cart</button>
+                  <button type="submit" class="btn btn-dark">
+                    Add to cart
+                  </button>
                 </div>
               </form>
             </div>
@@ -84,10 +105,14 @@
               <div class="invoice p-3 mb-3">
                 <div class="row">
                   <div class="col-12">
-                    <small class="float-right">Date: {{ date | date: "shortDate" }}</small>
+                    <small class="float-right"
+                      >Date: {{ date | date: "shortDate" }}</small
+                    >
                   </div>
                   <div class="col-12">
-                    <small class="float-right">Time: {{ date | date: "shortTime" }}</small>
+                    <small class="float-right"
+                      >Time: {{ date | date: "shortTime" }}</small
+                    >
                   </div>
                 </div>
 
@@ -123,8 +148,11 @@
                           <td>{{ cart.tax | currency: "IDR" }}</td>
                           <td>{{ cart.totalPrice | currency: "IDR" }}</td>
                           <td class="action">
-                            <button *ngIf="cart.status === 'on-process'" class="btn btn-outline-primary"
-                              (click)="onCancel(cart._id)">
+                            <button
+                              *ngIf="cart.status === 'on-process'"
+                              class="btn btn-outline-primary"
+                              (click)="onCancel(cart._id)"
+                            >
                               <i class="fas fa-trash"></i>
                             </button>
                           </td>
@@ -153,8 +181,13 @@
                 </div>
                 <div class="row no-print">
                   <div class="col-12">
-                    <button data-toggle="modal" data-target=".bd-example-modal-lg" type="button"
-                      class="btn btn-dark float-right" (click)="onCheckOut()">
+                    <button
+                      data-toggle="modal"
+                      data-target=".bd-example-modal-lg"
+                      type="button"
+                      class="btn btn-dark float-right"
+                      (click)="onCheckOut()"
+                    >
                       CheckOut
                     </button>
                   </div>
@@ -180,8 +213,13 @@
           </div>
         </section>
 
-        <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
-          aria-hidden="true">
+        <div
+          class="modal fade bd-example-modal-lg"
+          tabindex="-1"
+          role="dialog"
+          aria-labelledby="myLargeModalLabel"
+          aria-hidden="true"
+        >
           <div class="modal-dialog modal-lg">
             <div class="modal-content">
               <div class="receipt-content">
@@ -200,12 +238,18 @@
                         <div class="payment-info">
                           <div class="row mb-3">
                             <div class="col-12">
-                              <small>Date: {{ receiptData?.date | date: "shortDate" }}
+                              <small
+                                >Date:
+                                {{ receiptData?.date | date: "shortDate" }}
                               </small>
                             </div>
                             <div class="col-12">
-                              <small>Time:
-                                {{ receiptData?.date | date: "shortTime" }}</small>
+                              <small
+                                >Time:
+                                {{
+                                  receiptData?.date | date: "shortTime"
+                                }}</small
+                              >
                             </div>
                           </div>
                         </div>
@@ -220,25 +264,36 @@
                             </div>
                           </div>
                           <div class="items">
-                            <div class="row item" *ngFor="let i of receiptData?.items">
+                            <div
+                              class="row item"
+                              *ngFor="let i of receiptData?.items"
+                            >
                               <div class="col-xs-3 desc">{{ i.product }}</div>
                               <div class="col-xs-2 qty">{{ i.quantity }}</div>
                               <div class="col-xs-3 qty">
                                 {{ i.price | currency: "IDR" }}
                               </div>
                               <div class="col-xs-4 amount text-right">
-                                Rp {{ i.totalPrice | currency: "IDR" }}
+                                {{ i.totalPrice | currency: "IDR" }}
                               </div>
                             </div>
                           </div>
                           <div class="total text-right">
                             <div class="field">
                               Total Pajak (10%)
-                              <span>Rp {{ receiptData?.totalTax | currency: "IDR" }}</span>
+                              <span>
+                                {{
+                                  receiptData?.totalTax | currency: "IDR"
+                                }}</span
+                              >
                             </div>
                             <div class="field grand-total">
                               Total Bayar
-                              <span>Rp {{ receiptData?.subtotal | currency: "IDR" }}</span>
+                              <span>
+                                {{
+                                  receiptData?.subtotal | currency: "IDR"
+                                }}</span
+                              >
                             </div>
                           </div>
                           <p class="extra-notes">
@@ -248,7 +303,12 @@
                         </div>
                       </div>
                       <div class="print">
-                        <button ngxPrint printSectionId="receipt" [useExistingCss]="true" style="border-radius: 5px">
+                        <button
+                          ngxPrint
+                          printSectionId="receipt"
+                          [useExistingCss]="true"
+                          style="border-radius: 5px"
+                        >
                           <i class="fa fa-print"></i>
                           Print this receipt
                         </button>
@@ -265,8 +325,10 @@
   </div>
 
   <footer class="main-footer">
-    <strong>Copyright &copy; 2021
-      <a href="https://adminlte.io">Acong Kelontong</a>.</strong>
+    <strong
+      >Copyright &copy; 2021
+      <a href="https://adminlte.io">Acong Kelontong</a>.</strong
+    >
     All rights reserved.
     <div class="float-right d-none d-sm-inline-block"><b>Version</b> 3.1.0</div>
   </footer>
