@@ -24,7 +24,8 @@ export class DeliveryOrderComponent implements OnInit {
 onSubmit(){
   this.inventoryService.addDeliveryOrder(this.addDeliveryOrder.value).subscribe((response: any) =>{
     console.log(response)
-    Swal.fire("Success", "Add Delivery Order", "success");
+    Swal.fire("Success", "Chek product", "success");
+    this.router.navigate(["/inventory/product"]);
   });
 }
 }
