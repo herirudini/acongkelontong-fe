@@ -44,3 +44,7 @@ div.card.order {
 a.d-block {
   text-decoration: none;
 }
+.nav-item {
+  list-style-type: none;
+  text-transform: uppercase;
+}

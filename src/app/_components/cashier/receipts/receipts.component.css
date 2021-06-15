@@ -1,5 +1,5 @@
 .content-wrapper {
-    margin-top: 100px !important;
+    margin-top: 10px !important;
   }
   
   .brand-text.font-weight-light {
@@ -38,10 +38,5 @@
   
   a.d-block {
     text-decoration: none;
-  }
-  
-  section.content {
-    padding-left: 10px;
-    padding-right: 10px;
   }
   

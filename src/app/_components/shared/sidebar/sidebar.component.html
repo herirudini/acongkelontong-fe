@@ -19,9 +19,9 @@
                 <ul class="nav nav-treeview">
                     <li class="nav-item" *ngFor="let menu of menuData">
                         <a type="submit" class="nav-link" type="button" data-toggle="modal" data-target="#modal-default"
-                            [routerLink]='["../"+menu.link]'>
+                            [routerLink]='["../"+menu]'>
                             <i class="far fa-circle nav-icon"></i>
-                            <p>{{menu.menu}}</p>
+                            <p>{{menu}}</p>
                         </a>
                     </li>
                 </ul>

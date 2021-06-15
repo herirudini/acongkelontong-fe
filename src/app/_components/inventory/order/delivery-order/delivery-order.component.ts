@@ -18,7 +18,7 @@ export class DeliveryOrderComponent implements OnInit {
 
   ngOnInit(): void {this.addDeliveryOrder =  this.formBuilder.group({
     barcode : [null, [Validators.required]],
-    arrivedQuantity : [null, [Validators.required]],
+    arrivedQuantity : [null, [Validators.min(1)]],
   });
 }
 onSubmit(){

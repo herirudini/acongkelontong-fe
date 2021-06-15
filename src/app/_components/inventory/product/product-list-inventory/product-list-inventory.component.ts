@@ -44,7 +44,7 @@ export class ProductListInventoryComponent implements OnInit {
     });
     this.inputBrandForm.valueChanges.subscribe(value => {
       const reqBodyBrand: object = { brand_name: value.brand_name };
-      if (value.brand_name !== "all") {
+      if (value.brand_name !== "") {
         this.inventoryService.getProductByBrand(reqBodyBrand).subscribe((response: any) => {
           this.Product = response.data;
         });

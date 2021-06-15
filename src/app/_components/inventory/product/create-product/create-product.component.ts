@@ -33,8 +33,8 @@ export class CreateProductComponent implements OnInit {
       product_name: [null, [Validators.required]],
       image: [null, [Validators.required]],
       uom: [null, [Validators.required]],
-      buyPrice: [null, [Validators.required]],
-      sellPrice: [null, [Validators.required]],
+      buyPrice: [null, [Validators.min(1)]],
+      sellPrice: [null, [Validators.min(1)]],
       isAfterTax: [null, [Validators.required]],
       barcode: [null, [Validators.required]],
     });

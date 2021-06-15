@@ -19,7 +19,7 @@ export class PurchaseFormComponent implements OnInit {
 
   ngOnInit(): void {this.addPurchaseForm =  this.formBuilder.group({
     barcode : [null, [Validators.required]],
-    quantity : [null, [Validators.required]],
+    quantity : [null, [Validators.min(1)]],
     discount : []
     
   });

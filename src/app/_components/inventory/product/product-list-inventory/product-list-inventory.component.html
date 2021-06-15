@@ -1,10 +1,10 @@
 <h4>Daftar Produk</h4>
 <div class="d-flex">
-  <input [(ngModel)]="searchText" placeholder="Enter Product ID/Name" />
+  <input [(ngModel)]="searchText" placeholder="Search" />
   <span class="ml-5 mr-1 mt-1">    Filter:  </span>
   <form [formGroup]="inputBrandForm">
     <select class="custom-select mr-sm-2" id="inputNamaSuplier" formControlName="brand_name">
-      <option value="all" selected>All</option>
+      <option value="" selected></option>
       <option *ngFor="let brand of brandList" value="{{brand._id}}">{{brand?._id}}</option>
     </select>
   </form>

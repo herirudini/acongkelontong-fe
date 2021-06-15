@@ -66,18 +66,18 @@
         <div class="form-group col-4 col-md-2">
           <label for="inputHargaJual">Harga Jual</label>
           <input type="text" formControlName="sellPrice" class="form-control" id="inputHargaJual"
-            placeholder="Harga Jual" />
+            placeholder="number: E.g 5000" />
         </div>
 
         <div class="form-group col-4 col-md-2">
           <label for="inputHargaBeli">Harga beli</label>
           <input type="text" formControlName="buyPrice" class="form-control" id="inputHargaBeli"
-            placeholder="Harga Beli" />
+            placeholder="number: E.g 3000" />
         </div>
         
         <div class="form-group col-4 col-md-2">
           <label for="inputBarcode">Barcode</label>
-          <input type="text" formControlName="barcode" class="form-control" id="inputBarcode" placeholder="Barcode" />
+          <input type="text" formControlName="barcode" class="form-control" id="inputBarcode" placeholder="e.g 1694658618636" />
         </div>
 
         <div class="form-group col-4 col-md-4">
@@ -119,7 +119,7 @@
       </div>
 
       <div class="card-footer">
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <button type="submit" class="btn btn-primary" [disabled]="!addProductForm.valid">Submit</button>
       </div>
     </form>
   </div>

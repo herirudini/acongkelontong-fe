@@ -22,7 +22,7 @@ export class CreateUserComponent implements OnInit {
     this.url = location.origin + "/login/reset-password";
     this.createUserForm = this.formBuilder.group({
       new_username: [null, [Validators.required]],
-      new_email: [null, [Validators.required]],
+      new_email: [null, [Validators.email]],
       role: [null, [Validators.required]],
       originUrl: this.url
     });

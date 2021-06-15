@@ -47,6 +47,7 @@ import { ProductComponent } from './_components/inventory/product/product.compon
 import { OrderComponent } from './_components/inventory/order/order.component';
 import { SuplierComponent } from './_components/inventory/suplier/suplier.component';
 import { EmployeeComponent } from './_components/owner/employee/employee.component';
+import { ReceiptsComponent } from './_components/cashier/receipts/receipts.component';
 
 @NgModule({
   declarations: [
@@ -87,6 +88,7 @@ import { EmployeeComponent } from './_components/owner/employee/employee.compone
     OrderComponent,
     SuplierComponent,
     EmployeeComponent,
+    ReceiptsComponent,
   ],
   imports: [
     BrowserModule,

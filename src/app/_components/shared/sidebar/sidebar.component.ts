@@ -16,58 +16,10 @@ export class SidebarComponent implements OnInit {
     let router: any = this.route.url;
     router = router.split('/');
     // console.log(router[1])
-    const owner = [
-      {
-        menu: "CASHFLOW",
-        link: "owner/cashflow"
-      },
-      {
-        menu: "TOP-10",
-        link: "owner/top-ten"
-      },
-      {
-        menu: "EMPLOYEE",
-        link: "owner/employee"
-      }
-    ];
-    const inventory = [
-      {
-        menu: "PRODUCT",
-        link: "product"
-      },
-      {
-        menu: "ORDER",
-        link: "order"
-      },
-      {
-        menu: "SUPLIER",
-        link: "suplier"
-      }
-    ];
-    const finance = [
-      {
-        menu: "INVOICE",
-        link: "invoice"
-      },
-      {
-        menu: "INCOME",
-        link: "income"
-      },
-      {
-        menu: "OUTCOME",
-        link: "outcome"
-      }
-    ]
-    const cashier = [
-      {
-        menu: "CART",
-        link: "cart"
-      },
-      {
-        menu: "RECEIPT",
-        link: "receipt"
-      }
-    ]
+    const owner = ["cashflow", "top-10", "employee"];
+    const inventory = ["product", "order", "suplier"];
+    const finance = ["invoice", "income", "outcome"]
+    const cashier = ["cart", "receipts"]
     const role: string | null = this.authServices.getUserRole()
     if (router[1] == "inventory") {
       this.menuData = inventory;

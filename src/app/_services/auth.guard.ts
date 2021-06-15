@@ -1,5 +1,6 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnInit } from '@angular/core';
 import {
+  ActivatedRoute,
   ActivatedRouteSnapshot,
   CanActivate,
   Router,
@@ -12,22 +13,33 @@ import { AuthService } from './auth.service';
 @Injectable({
   providedIn: 'root',
 })
-export class AuthGuard implements CanActivate {
-  constructor(private authService: AuthService, private router: Router) {}
+export class AuthGuard implements OnInit, CanActivate {
+  arrayRouter!: any;
+  routerRole!: any;
+  constructor(private authService: AuthService, private router: Router) { }
 
+  ngOnInit(): void {
+
+  }
   canActivate(
-    route: ActivatedRouteSnapshot,
+    actRoute: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ):
     | Observable<boolean | UrlTree>
     | Promise<boolean | UrlTree>
     | boolean
     | UrlTree {
-    if (this.authService.getIsLogin() == false) {
+    this.routerRole = actRoute.data[0]
+    const isLogin = this.authService.getIsLogin();
+    const userRole = this.authService.getUserRole();
+    console.log(this.routerRole)
+    if (isLogin == false) {
       alert('login dulu bos!');
       this.router.navigate(['login']);
+    } else if (this.routerRole != userRole && userRole != "owner") {
+      alert('salah kamar!');
+      this.router.navigate([userRole]);
     }
-    console.log(this.authService.getIsLogin)
     return true;
   }
 }
