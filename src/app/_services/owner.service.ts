@@ -24,6 +24,9 @@ export class OwnerService {
   }
   GetTopProduct(data: any) {
     return this.http.put(`${apiURL}/owner/top-product`, data);
-}
+  }
+  cashFlow(data: any) {
+    return this.http.put(`${apiURL}/owner/cashflow`, data);
+  }
 }
 
