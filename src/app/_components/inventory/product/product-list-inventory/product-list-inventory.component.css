@@ -23,3 +23,7 @@ div.card.product {
     margin-left: 30px;
   }
   
+  .alert {
+    position: fixed;
+    /* margin-top: 20%; */
+  }

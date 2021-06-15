@@ -2,7 +2,7 @@
   <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Danger:">
     <use xlink:href="#exclamation-triangle-fill" />
   </svg>
-  <div>Stock Produk kurang dari 10</div>
+  <div *ngFor="let index of lowProduct">Stock {{index}} kurang dari 10 <button (click)="close(index)">X</button> </div>
 </div>
 
 <h4>Daftar Produk</h4>

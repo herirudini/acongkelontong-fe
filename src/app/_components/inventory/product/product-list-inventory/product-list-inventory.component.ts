@@ -28,13 +28,13 @@ export class ProductListInventoryComponent implements OnInit {
   subscribenjing!: any;
   subscribeListBrand!: any;
   isAlert = false;
-
+  lowProduct?: any[];
   constructor(
     public formBuilder: FormBuilder,
     private http: HttpClient,
     private inventoryService: InventoryService,
     public router: Router
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.subscribeListBrand = this.inventoryService
@@ -52,7 +52,10 @@ export class ProductListInventoryComponent implements OnInit {
       for (let i = 0; i < Product.length; i++) {
         console.log(Product[i].stock);
         if (Product[i].stock < 10) {
+          const product = []
           this.isAlert = true;
+          product.push(Product[i].brand_name + "_" + Product[i].product_name + "_" + Product[i].uom)
+          this.lowProduct = product
         }
       }
     });
@@ -72,8 +75,18 @@ export class ProductListInventoryComponent implements OnInit {
       // this.subscribenjing.unsubscribe()
     });
   }
-
-  checkFilter() {}
+  close(product: any) {
+    const index = this.lowProduct?.indexOf(product);
+    if (index! > -1) {
+      this.lowProduct!.splice(index!, 1)
+      this.checkLowProduct()
+    }
+  }
+  checkLowProduct() {
+    if (this.lowProduct!.length < 1) {
+      this.isAlert = false;
+    }
+  }
 
   activate(id: string, status: string) {
     const params = id;
