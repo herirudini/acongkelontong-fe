@@ -21,7 +21,6 @@
         <div class="form-group col-4 col-md-4">
           <label for="inputNamaSuplier">Suplier</label>
           <select class="custom-select mr-sm-2" id="inputNamaSuplier" formControlName="suplier_name">
-            <option value=""></option>
             <option *ngFor="let suplier of suplierList" value="{{suplier.suplier_name}}">{{suplier.suplier_name}}</option>
           </select>
         </div>
