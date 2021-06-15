@@ -32,7 +32,7 @@ import { IncomeComponent } from './_components/finance/income/income.component';
 import { OutcomeComponent } from './_components/finance/outcome/outcome.component';
 // import { ReceiptComponent } from './_components/cashier/receipt/receipt.component';
 import { CartComponent } from './_components/cashier/cart/cart.component';
-import { PurchaseFormComponent } from './_components/inventory/order/purchase-form/purchase-form.component';
+// import { PurchaseFormComponent } from './_components/inventory/order/purchase-form/purchase-form.component';
 import { HomeComponent } from './_components/home/home.component';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 // import { FormAddToCartComponent } from './_components/cashier/form-add-to-cart/form-add-to-cart.component';
@@ -74,7 +74,7 @@ import { ReceiptsComponent } from './_components/cashier/receipts/receipts.compo
     OutcomeComponent,
     // ReceiptComponent,
     CartComponent,
-    PurchaseFormComponent,
+    // PurchaseFormComponent,
     HomeComponent,
     // FormAddToCartComponent,
     ProductListInventoryComponent,
