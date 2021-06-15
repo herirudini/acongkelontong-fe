@@ -21,8 +21,8 @@ export class InvoiceDetailComponent implements OnInit {
   }
   paySuplier(invoice_id: any) {
     this.financeServices.setStatusInvoice(invoice_id).subscribe((response: any) => {
-      console.log(response)
-      this.ngOnInit
+      this.invoiceData = response.data
+      this.ngOnInit()
     })
   }
 }

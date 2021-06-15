@@ -30,6 +30,7 @@ export class AddSuplierComponent implements OnInit {
     this.inventoryService.addSuplier(this.addSuplierForm.value).subscribe((response: any) => {
       console.log(response)
       Swal.fire("Success", "Add suplier success..", "success");
+      window.location.reload()
     });
   }
 

@@ -28,11 +28,11 @@ export class CreateUserComponent implements OnInit {
     });
   }
   onSubmit() {
-
     this.ownerService.createUser(this.createUserForm.value).subscribe((response: any) => {
       console.log(response)
       if (response.success) {
         Swal.fire("Success", response.message, response.data);
+        window.location.reload()
       }
     });
   }

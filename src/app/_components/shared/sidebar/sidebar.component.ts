@@ -18,7 +18,7 @@ export class SidebarComponent implements OnInit {
     // console.log(router[1])
     const owner = ["cashflow", "top-10", "employee"];
     const inventory = ["product", "order", "suplier"];
-    const finance = ["invoice", "income", "outcome"]
+    const finance = ["invoices", "income", "outcome"]
     const cashier = ["cart", "receipts"]
     const role: string | null = this.authServices.getUserRole()
     if (router[1] == "inventory") {

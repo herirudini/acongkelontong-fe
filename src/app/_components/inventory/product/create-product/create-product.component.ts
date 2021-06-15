@@ -72,6 +72,7 @@ export class CreateProductComponent implements OnInit {
       console.log(response)
       this.subscribeCreateProduct.unsubscribe()
       Swal.fire("Success", "Add Product success..", "success");
+      window.location.reload()
     });
   }
 

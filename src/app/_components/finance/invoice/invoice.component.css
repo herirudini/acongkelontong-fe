@@ -1,19 +1,5 @@
-div.invoice {
-  border: 2px solid black;
-  border-radius: 5px;
-  padding-top: 10px;
-}
-
-tbody {
-  cursor: pointer;
-}
-
-input,
-h4 {
-  margin-left: 10px;
-}
 .content-wrapper {
-  margin-top: 100px !important;
+  margin-top: 10px !important;
 }
 
 .brand-text.font-weight-light {
@@ -50,11 +36,11 @@ a.brand-link {
   margin-left: 5px;
 }
 
-a.d-block {
-  text-decoration: none;
+div.card.order {
+  border: 2px solid black;
+  border-radius: 10px;
 }
 
-section.content {
-  padding-left: 10px;
-  padding-right: 10px;
+a.d-block {
+  text-decoration: none;
 }

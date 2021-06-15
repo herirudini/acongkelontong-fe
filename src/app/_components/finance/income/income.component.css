@@ -1,5 +1,5 @@
 .content-wrapper {
-  margin-top: 60px !important;
+  margin-top: 10px !important;
 }
 
 .brand-text.font-weight-light {
@@ -36,17 +36,11 @@ a.brand-link {
   margin-left: 5px;
 }
 
+div.card.order {
+  border: 2px solid black;
+  border-radius: 10px;
+}
+
 a.d-block {
   text-decoration: none;
-}
-
-section.content {
-  padding-left: 10px;
-  padding-right: 10px;
-}
-
-h4 {
-  margin-top: 15px;
-  margin-left: 10px;
-  font-size: 50px;
 }

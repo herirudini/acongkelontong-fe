@@ -15,13 +15,19 @@ import Swal from 'sweetalert2';
   styleUrls: ['./listuser.component.css']
 })
 export class ListuserComponent implements OnInit {
-ListUser! : any;
-  constructor( private http: HttpClient,
-    private ownerService: OwnerService,
-    public router: Router) { }
+  ListUser!: any;
+  subscribe?: Subscription;
 
+  constructor(private http: HttpClient,
+    private ownerService: OwnerService,
+    public router: Router  ) { }
   ngOnInit(): void {
     this.ownerService.listuser().subscribe((User) => {
+      this.ListUser = User;
+    });
+  }
+  subNow() {
+    this.subscribe = this.ownerService.listuser().subscribe((User) => {
       this.ListUser = User;
     });
   }
