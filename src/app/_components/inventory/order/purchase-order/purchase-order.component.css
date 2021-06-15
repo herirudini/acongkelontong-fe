@@ -1,3 +1,12 @@
+div.card.form-po {
+    border: 2px solid black;
+    border-radius: 6px;
+  }
+  
+  h2 {
+    font-weight: bolder;
+  }
+  
 section.content.purchase-order {
     border: 2px solid black;
     border-radius: 5px;

@@ -1,4 +1,35 @@
-<section class="content purchase-order">
+<div class="card form-po">
+  <div class="card-header border-transparent">
+    <h2 class="card-title">Form Purchase Order</h2>
+  </div>
+  <hr />
+  <div class="card-body p-0">
+    <form [formGroup]="addPurchaseForm" (ngSubmit)="onSubmit()">
+      <div class="card-body form-row">
+        <div class="form-group col-4 col-md-4">
+          <label for="inputNamaSupplier">Barcode</label>
+          <input type="barcode" formControlName="barcode" class="form-control" placeholder="barcode" />
+        </div>
+
+        <div class="form-group col-4 col-md-4">
+          <label for="inputContact">Quantity</label>
+          <input type="quantity" formControlName="quantity" class="form-control" placeholder="quantity" />
+        </div>
+
+        <div class="form-group col-4 col-md-4">
+          <label for="inputAddress">Discount</label>
+          <input type="discount" formControlName="discount" class="form-control" placeholder="discount" />
+        </div>
+      </div>
+
+      <div class="card-footer">
+        <button type="submit" class="btn btn-primary" [disabled]="!addPurchaseForm.valid">Submit</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<section class="content purchase-order" id="purchaseOrder">
   <div class="container-fluid">
     <div class="content-header">
       <h1>Purchase Order</h1>
@@ -12,7 +43,7 @@
             <div class="col-12">
               <h4>
                 <i class="fas fa-globe"></i> Acong Kelontong
-                <small class="float-right">Tanggal: 25/05/2021</small>
+                <small class="float-right">Tanggal: {{orderData?.createdAt |date: "shortDate"}}</small>
               </h4>
             </div>
             <!-- /.col -->
@@ -33,17 +64,17 @@
             <div class="col-sm-4 invoice-col">
               Kepada:
               <address>
-                <strong>Omad Sejahtera</strong><br />
+                <strong>{{suplierDetail?.suplier_name}}</strong><br />
                 <!-- 795 Folsom Ave, Suite 600<br /> -->
-                Jl. Cikinir No.321<br />
-                Telepon: (555) 539-1037<br />
-                Email: omad@sejahtera.com
+                {{suplierDetail?.address}}<br />
+                Telepon: {{suplierDetail?.contact}}<br />
+                <!-- Email: omad@sejahtera.com -->
               </address>
             </div>
             <!-- /.col -->
             <div class="col-sm-4 invoice-col">
-              <b>Order ID:</b> 4F3S8J<br />
-              <b>Tanggal Order:</b> 2/22/2014<br />
+              <b>Order ID:</b> {{orderData?._id}}<br />
+              <!-- <b>Tanggal Order:</b> {{orderData?.createdAt |date: "shortDate"}}<br /> -->
             </div>
             <!-- /.col -->
           </div>
@@ -55,30 +86,20 @@
               <table class="table table-striped">
                 <thead>
                   <tr>
-                    <th>Nama Produk</th>
                     <th>Brand</th>
+                    <th>Produk</th>
                     <th>UOM</th>
                     <th>Harga</th>
                     <th>Qty</th>
-                    <th>Subtotal</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
-                    <td>Indomie Goreng</td>
-                    <td>Indomie</td>
-                    <td>Box</td>
-                    <td>Rp 6.400.005,-</td>
-                    <td>10</td>
-                    <td>Rp 64.000.050,-</td>
-                  </tr>
-                  <tr>
-                    <td>Indomie Ayam Bawang</td>
-                    <td>Indomie</td>
-                    <td>Box</td>
-                    <td>Rp 5.000.000,-</td>
-                    <td>20</td>
-                    <td>Rp 50.000.000,-</td>
+                    <th>{{orderData?.brand_name}}</th>
+                    <th>{{orderData?.product_name}}</th>
+                    <th>{{orderData?.uom}}</th>
+                    <th>{{orderData?.buyPrice |currency:"IDR"}}</th>
+                    <th>{{orderData?.quantity}}</th>
                   </tr>
                 </tbody>
               </table>
@@ -91,21 +112,21 @@
             <div class="col-7"></div>
             <!-- /.col -->
             <div class="col-5">
-              <p class="lead">Amount Due 2/22/2014</p>
+              <p class="lead">Amount Due {{orderData?.createdAt |date: "shortDate"}}</p>
 
               <div class="table-responsive">
                 <table class="table">
-                  <tr>
+                  <!-- <tr>
                     <th style="width: 50%">Total:</th>
-                    <td>Rp 114.000.050</td>
+                    <td></td>
+                  </tr> -->
+                  <tr>
+                    <th>Diskon</th>
+                    <td>{{orderData?.discount}} %</td>
                   </tr>
                   <tr>
-                    <th>Diskon (10%)</th>
-                    <td>Rp 11.400.005,-</td>
-                  </tr>
-                  <tr>
-                    <th>Total Bayar:</th>
-                    <td>Rp 102.600.045,-</td>
+                    <th>Total:</th>
+                    <td>{{orderData?.subTotal |currency:"IDR"}}</td>
                   </tr>
                 </table>
               </div>
@@ -117,8 +138,9 @@
           <!-- this row will not appear when printing -->
           <div class="row no-print">
             <div class="col-12">
-              <button type="button" class="btn btn-dark float-right">
-                Submit Order
+              <button type="button" class="btn btn-dark float-right" ngxPrint printSectionId="purchaseOrder"
+                [useExistingCss]="true">
+                Print
               </button>
             </div>
           </div>

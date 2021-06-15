@@ -21,6 +21,9 @@ export class InventoryService {
   listSuplier() {
     return this.http.get<any>(`${apiURL}/inventory/suplier`);
   }
+  getSuplierByName(data: any) {
+    return this.http.put<any>(`${apiURL}/inventory/suplier`, data);
+  }
   listBrand(data: any) {
     return this.http.put<any>(`${apiURL}/inventory/list-brand`, data);
   }
