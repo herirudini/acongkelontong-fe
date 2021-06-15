@@ -22,7 +22,6 @@ export class CartComponent implements OnInit {
   countTotalPrice?: number;
   date: any;
   receiptData?: Receipt;
-  isAlert = false;
 
   constructor(
     private cashierService: CashierService,
@@ -45,12 +44,6 @@ export class CartComponent implements OnInit {
     this.cashierService.getAllActiveProduct().subscribe((response: any) => {
       console.log('masuk subscribe all product', response);
       this.Product = response;
-      for (let i = 0; i < response.length; i++) {
-        console.log(response[i].stock);
-        if (response[i].stock < 10) {
-          this.isAlert = true;
-        }
-      }
     });
   }
   initListCart() {

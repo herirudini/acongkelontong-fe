@@ -1,11 +1,34 @@
+<div
+  *ngIf="isAlert"
+  class="alert alert-danger d-flex align-items-center"
+  role="alert"
+>
+  <svg
+    class="bi flex-shrink-0 me-2"
+    width="24"
+    height="24"
+    role="img"
+    aria-label="Danger:"
+  >
+    <use xlink:href="#exclamation-triangle-fill" />
+  </svg>
+  <div>Stock Produk kurang dari 10</div>
+</div>
+
 <h4>Daftar Produk</h4>
 <div class="d-flex">
   <input [(ngModel)]="searchText" placeholder="Search" />
-  <span class="ml-5 mr-1 mt-1">    Filter:  </span>
+  <span class="ml-5 mr-1 mt-1"> Filter: </span>
   <form [formGroup]="inputBrandForm">
-    <select class="custom-select mr-sm-2" id="inputNamaSuplier" formControlName="brand_name">
+    <select
+      class="custom-select mr-sm-2"
+      id="inputNamaSuplier"
+      formControlName="brand_name"
+    >
       <option value="" selected></option>
-      <option *ngFor="let brand of brandList" value="{{brand._id}}">{{brand?._id}}</option>
+      <option *ngFor="let brand of brandList" value="{{ brand._id }}">
+        {{ brand?._id }}
+      </option>
     </select>
   </form>
 </div>
@@ -28,25 +51,38 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let product of Product | filter:searchText">
+    <tr *ngFor="let product of Product | filter: searchText">
       <td>{{ product?._id }}</td>
       <td>{{ product?.product_name }}</td>
       <td>{{ product?.suplier_name }}</td>
       <td>{{ product?.brand_name }}</td>
       <td>{{ product?.barcode }}</td>
-      <td>{{ product?.buyPrice | currency: "IDR"}}</td>
-      <td>{{ product?.sellPrice | currency: "IDR"}}</td>
+      <td>{{ product?.buyPrice | currency: "IDR" }}</td>
+      <td>{{ product?.sellPrice | currency: "IDR" }}</td>
       <td>{{ product?.uom }}</td>
       <td>{{ product?.stock }}</td>
-      <td><img [src]="product?.image" alt="product image" width="100" height="100" /></td>
+      <td>
+        <img
+          [src]="product?.image"
+          alt="product image"
+          width="100"
+          height="100"
+        />
+      </td>
       <!-- <td>{{ product.status }}</td> -->
       <td class="action">
-        <button *ngIf="product?.status === 'inactive'" class="btn btn-outline-primary"
-          (click)="activate(product?._id, product?.status)">
+        <button
+          *ngIf="product?.status === 'inactive'"
+          class="btn btn-outline-primary"
+          (click)="activate(product?._id, product?.status)"
+        >
           Inactive
         </button>
-        <button *ngIf="product?.status === 'active'" class="btn btn-outline-warning"
-          (click)="deactivate(product?._id, product?.status)">
+        <button
+          *ngIf="product?.status === 'active'"
+          class="btn btn-outline-warning"
+          (click)="deactivate(product?._id, product?.status)"
+        >
           Active
         </button>
       </td>

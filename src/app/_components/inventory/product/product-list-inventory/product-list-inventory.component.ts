@@ -1,6 +1,11 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Product } from 'src/app/_models/Product';
@@ -14,7 +19,6 @@ import Swal from 'sweetalert2';
   styleUrls: ['./product-list-inventory.component.css'],
 })
 export class ProductListInventoryComponent implements OnInit {
-
   title = 'Custom Search';
   searchText: any;
   Product!: Product[];
@@ -23,49 +27,58 @@ export class ProductListInventoryComponent implements OnInit {
   brandList?: any[];
   subscribenjing!: any;
   subscribeListBrand!: any;
+  isAlert = false;
+
   constructor(
     public formBuilder: FormBuilder,
     private http: HttpClient,
     private inventoryService: InventoryService,
     public router: Router
-  ) { }
+  ) {}
 
   ngOnInit(): void {
-    this.subscribeListBrand = this.inventoryService.listAllBrand().subscribe((response: any) => {
-      console.log(response)
-      this.brandList = response.data
-      this.subscribeListBrand.unsubscribe()
-    });
+    this.subscribeListBrand = this.inventoryService
+      .listAllBrand()
+      .subscribe((response: any) => {
+        console.log(response);
+        this.brandList = response.data;
+        this.subscribeListBrand.unsubscribe();
+      });
     this.inputBrandForm = this.formBuilder.group({
-      brand_name: new FormControl('', [Validators.required])
+      brand_name: new FormControl('', [Validators.required]),
     });
     this.inventoryService.getAllProduct().subscribe((Product) => {
       this.Product = Product;
+      for (let i = 0; i < Product.length; i++) {
+        console.log(Product[i].stock);
+        if (Product[i].stock < 10) {
+          this.isAlert = true;
+        }
+      }
     });
-    this.inputBrandForm.valueChanges.subscribe(value => {
+    this.inputBrandForm.valueChanges.subscribe((value) => {
       const reqBodyBrand: object = { brand_name: value.brand_name };
-      if (value.brand_name !== "") {
-        this.inventoryService.getProductByBrand(reqBodyBrand).subscribe((response: any) => {
-          this.Product = response.data;
-        });
+      if (value.brand_name !== '') {
+        this.inventoryService
+          .getProductByBrand(reqBodyBrand)
+          .subscribe((response: any) => {
+            this.Product = response.data;
+          });
       } else {
         this.inventoryService.getAllProduct().subscribe((Product) => {
           this.Product = Product;
         });
       }
       // this.subscribenjing.unsubscribe()
-    })
+    });
   }
 
-  checkFilter() {
-
-  }
-
+  checkFilter() {}
 
   activate(id: string, status: string) {
-    const params = id
-    const data: object = { status: status }
-    console.log("datastatus:", data)
+    const params = id;
+    const data: object = { status: status };
+    console.log('datastatus:', data);
     this.UpdateStatusSubcription = this.inventoryService
       .UpdateStatus(params, data) //status = "inactive"
       .subscribe((response: any) => {
@@ -82,9 +95,9 @@ export class ProductListInventoryComponent implements OnInit {
   }
 
   deactivate(id: string, status: string) {
-    const params = id
-    const data: object = { status: status }
-    console.log("datastatus:", data)
+    const params = id;
+    const data: object = { status: status };
+    console.log('datastatus:', data);
     this.UpdateStatusSubcription = this.inventoryService
       .UpdateStatus(params, data) //status = "active"
       .subscribe((response: any) => {
