@@ -1,38 +1,41 @@
-
-    <div class="card form-supplier">
-        <div class="card-header border-transparent">
-          <h2 class="card-title">Form Delivery Order</h2>
+<div class="card form-supplier">
+  <div class="card-header border-transparent">
+    <h2 class="card-title">Form Delivery Order</h2>
+  </div>
+  <hr />
+  <div class="card-body p-0">
+    <form [formGroup]="addDeliveryOrder" (ngSubmit)="onSubmit()">
+      <div class="card-body form-row">
+        <div class="form-group col-4 col-md-4">
+          <label for="inputNamaSupplier">Barcode</label>
+          <input
+            type="barcode"
+            formControlName="barcode"
+            class="form-control"
+            placeholder="barcode"
+          />
         </div>
-        <hr />
-        <div class="card-body p-0">
-          <form [formGroup]="addDeliveryOrder" (ngSubmit)="onSubmit()">
-            <div class="card-body form-row">
-              <div class="form-group col-4 col-md-4">
-                <label for="inputNamaSupplier">Barcode</label>
-                <input
-                  type="barcode"
-                  formControlName="barcode"
-                  class="form-control"
-                  placeholder="barcode"
-                />
-              </div>
-      
-              <div class="form-group col-4 col-md-4">
-                <label for="inputContact">ArrivedQuantity</label>
-                <input
-                  type="arrivedQuantity"
-                  formControlName="arrivedQuantity"
-                  class="form-control"
-                  placeholder="number: E.g 1000"
-                />
-              </div>
-      
-           
-            </div>
-      
-            <div class="card-footer">
-              <button type="submit" class="btn btn-primary" [disabled]="!addDeliveryOrder.valid">Confirm</button>
-            </div>
-          </form>
+
+        <div class="form-group col-4 col-md-4">
+          <label for="inputContact">ArrivedQuantity</label>
+          <input
+            type="arrivedQuantity"
+            formControlName="arrivedQuantity"
+            class="form-control"
+            placeholder="number: E.g 1000"
+          />
         </div>
       </div>
+
+      <div class="card-footer">
+        <button
+          type="submit"
+          class="btn btn-primary"
+          [disabled]="!addDeliveryOrder.valid"
+        >
+          Confirm
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
