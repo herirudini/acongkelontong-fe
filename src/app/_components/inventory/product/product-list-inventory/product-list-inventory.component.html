@@ -49,7 +49,7 @@
     <tr *ngFor="let product of Product | filter: searchText">
       <td class="action">
         <button *ngIf="product?.status === 'inactive'" class="btn btn-outline-primary"
-          (click)="activate(product?._id, product?.status)">
+          (click)="activate(product?._id, product?.status)" [disabled]="product?.stock < 10">
           Inactive
         </button>
         <button *ngIf="product?.status === 'active'" class="btn btn-outline-warning"
