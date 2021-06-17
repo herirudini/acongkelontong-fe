@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { pipe } from 'rxjs';
+import { Observable, pipe, ReplaySubject } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
 const apiURL: string = environment.ApiUrl;
@@ -32,6 +32,13 @@ export class InventoryService {
   }
   addProduct(data: any) {
     return this.http.post<any>(`${apiURL}/inventory/product`, data);
+  }
+  convertFile(file : File) : Observable<string> {
+    const result = new ReplaySubject<string>(1);
+    const reader = new FileReader();
+    reader.readAsBinaryString(file);
+    reader.onload = (event: any) => result.next(btoa(event.target.result.toString()));
+    return result;
   }
   addPurchaseOrder(data: any) {
     return this.http.post<any>(`${apiURL}/inventory/purchase-order`, data);

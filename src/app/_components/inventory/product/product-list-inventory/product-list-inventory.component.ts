@@ -22,12 +22,13 @@ export class ProductListInventoryComponent implements OnInit {
   title = 'Custom Search';
   searchText: any;
   Product!: Product[];
+  productImages!: any[];
   UpdateStatusSubcription!: Subscription;
   inputBrandForm!: FormGroup;
   brandList?: any[];
   subscribenjing!: any;
   subscribeListBrand!: any;
-  isAlert = false;
+  isAlert = true;
   lowProduct?: any[];
   constructor(
     public formBuilder: FormBuilder,
@@ -47,16 +48,22 @@ export class ProductListInventoryComponent implements OnInit {
     this.inputBrandForm = this.formBuilder.group({
       brand_name: new FormControl('', [Validators.required]),
     });
-    this.inventoryService.getAllProduct().subscribe((Product) => {
-      this.Product = Product;
-      for (let i = 0; i < Product.length; i++) {
-        console.log(Product[i].stock);
-        if (Product[i].stock < 10) {
-          const product = []
-          this.isAlert = true;
-          product.push(Product[i].brand_name + "_" + Product[i].product_name + "_" + Product[i].uom)
+    this.inventoryService.getAllProduct().subscribe((data) => {
+      this.Product = data;
+      // console.log(data)
+      for (let i = 0; i < data.length; i++) {
+        console.log(data[i].stock);
+        const images = [];
+        images.push("data:image/jpeg;base64" + data[i].image)
+        this.productImages = images
+        if (data[i].stock < 10) {
+          const product = [];
+          product.push(data[i].brand_name + "_" + data[i].product_name + "_" + data[i].uom)
           this.lowProduct = product
-        }
+          // this.isAlert = true;
+          // this.checkLowProduct()
+          // console.log(this.isAlert,this.lowProduct)
+        } else this.isAlert = false;
       }
     });
     this.inputBrandForm.valueChanges.subscribe((value) => {
@@ -85,6 +92,8 @@ export class ProductListInventoryComponent implements OnInit {
   checkLowProduct() {
     if (this.lowProduct!.length < 1) {
       this.isAlert = false;
+    } else {
+      this.isAlert = true;
     }
   }
 

@@ -11,12 +11,14 @@ import Swal from 'sweetalert2';
   styleUrls: ['./create-product.component.css']
 })
 export class CreateProductComponent implements OnInit {
-
+  uploadForm!: FormGroup;
   addProductForm!: FormGroup;
   suplierList!: any;
   brandList!: any;
   productList!: any;
   uomList!: any;
+  imageEncoding!: any;
+  previewImage: any;
 
   constructor(public formBuilder: FormBuilder, public inventoryService: InventoryService, public router: Router) { }
 
@@ -26,6 +28,9 @@ export class CreateProductComponent implements OnInit {
     this.subscribeListSuplier = this.inventoryService.listSuplier().subscribe((response: any) => {
       this.suplierList = response.data
       this.subscribeListSuplier.unsubscribe()
+    })
+    this.uploadForm = this.formBuilder.group({
+      chooseImage: [null, [Validators.required]]
     })
     this.addProductForm = this.formBuilder.group({
       suplier_name: [null, [Validators.required]],
@@ -38,36 +43,37 @@ export class CreateProductComponent implements OnInit {
       isAfterTax: [null, [Validators.required]],
       barcode: [null, [Validators.required]],
     });
-    this.onChanges();
   }
 
   subscribeValueChange: any;
   subscribeListBrand: any;
   subscribeListProductUom: any;
 
-  onChanges(): void {
-    this.subscribeValueChange = this.addProductForm.valueChanges.subscribe(value => {
-      const reqBodySuplier: object = { suplier_name: value.suplier_name };
-      const reqBodyBrand: object = { brand_name: value.brand_name };
-      this.subscribeListBrand = this.inventoryService.listBrand(reqBodySuplier).subscribe((response: any) => {
-        console.log(response)
-        this.brandList = response.data.brands
-        this.subscribeListBrand.unsubscribe()
-      });
-      this.subscribeListProductUom = this.inventoryService.listProductUom(reqBodyBrand).subscribe((response: any) => {
-        console.log(response)
-        this.productList = response.data.product_name
-        this.uomList = response.data.uom
-        this.subscribeListProductUom.unsubscribe()
-      });
-      this.subscribeValueChange.unsubscribe()
+  listSuplier(data: any) {
+    const reqBodySuplier: object = { suplier_name: data?.target.files[0] };
+    this.subscribeListBrand = this.inventoryService.listBrand(reqBodySuplier).subscribe((response: any) => {
+      console.log(response)
+      this.brandList = response.data.brands
+      this.subscribeListBrand.unsubscribe()
+    });
+  }
+  listBrand(data: any) {
+    const reqBodyBrand: object = { brand_name: data?.target.files[0] };
+    this.subscribeListProductUom = this.inventoryService.listProductUom(reqBodyBrand).subscribe((response: any) => {
+      console.log(response)
+      this.productList = response.data.product_name
+      this.uomList = response.data.uom
+      this.subscribeListProductUom.unsubscribe()
+    });
+  }
+  subscribeCreateProduct: any;
+  onFileSelected(event: any) {
+    this.inventoryService.convertFile(event.target.files[0]).subscribe((result: any) => {
+      this.addProductForm.controls['image'].setValue(result)
     })
   }
-
-  subscribeCreateProduct: any;
-  
   onSubmit() {
-    console.log("checkformvalue:", this.addProductForm.value)
+    console.log(this.addProductForm.value)
     this.subscribeCreateProduct = this.inventoryService.addProduct(this.addProductForm.value).subscribe((response: any) => {
       console.log(response)
       this.subscribeCreateProduct.unsubscribe()
@@ -75,5 +81,4 @@ export class CreateProductComponent implements OnInit {
       window.location.reload()
     });
   }
-
 }

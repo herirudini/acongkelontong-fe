@@ -20,7 +20,7 @@
 
         <div class="form-group col-4 col-md-4">
           <label for="inputNamaSuplier">Suplier</label>
-          <select class="custom-select mr-sm-2" id="inputNamaSuplier" formControlName="suplier_name">
+          <select class="custom-select mr-sm-2" id="inputNamaSuplier" formControlName="suplier_name" (change)="listSuplier($event)">
             <option *ngFor="let suplier of suplierList" value="{{suplier.suplier_name}}">{{suplier.suplier_name}}</option>
           </select>
         </div>
@@ -33,7 +33,7 @@
         </div> -->
         <div class="form-group col-4 col-md-2">
           <label for="inputBrand">Brand</label>
-          <input type="text"  id="inputBrand" class="form-control" list="brands" formControlName="brand_name" />
+          <input type="text"  id="inputBrand" class="form-control" list="brands" formControlName="brand_name" (change)="listBrand($event)" />
           <datalist id="brands">
             <option *ngFor="let brand of brandList">{{brand}}</option>
           </datalist>
@@ -104,16 +104,18 @@
 
 
         <div class="form-group col-9 col-md-4">
-          <label for="inputGambar">Gambar</label>
-          <div class="input-group">
-            <div class="custom-file">
-              <input type="file" formControlName="image" class="custom-file-input" id="exampleInputFile" />
-              <label class="custom-file-label" for="exampleInputFile">Choose file</label>
+          <form [formGroup]="uploadForm" (ngSubmit)="previewImage()">
+            <label for="inputGambar">Gambar</label>
+            <div class="input-group">
+              <div class="custom-file">
+                <input type="file" formControlName="chooseImage" class="custom-file-input" id="exampleInputFile" (change)="onFileSelected($event)"/>
+                <label class="custom-file-label" for="exampleInputFile">Choose file</label>
+              </div>
+              <div class="input-group-append">
+                <span type="submit" class="input-group-text">Upload</span>
+              </div>
             </div>
-            <div class="input-group-append">
-              <span class="input-group-text">Upload</span>
-            </div>
-          </div>
+          </form>
         </div>
       </div>
 
