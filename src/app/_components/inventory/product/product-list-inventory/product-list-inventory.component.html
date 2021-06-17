@@ -1,16 +1,10 @@
-<div *ngIf="isAlert" class="alert alert-danger d-flex align-items-center" role="alert">
-  <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Danger:">
-    <use xlink:href="#exclamation-triangle-fill" />
-  </svg>
-  <div *ngFor="let index of lowProduct">{{index}} kurang dari 10 <button (click)="close(index)">X</button> </div>
-</div>
 
 <h4>Daftar Produk</h4>
 <div class="d-flex">
   <input [(ngModel)]="searchText" placeholder="Search" />
   <span class="ml-5 mr-1 mt-1"> Filter: </span>
   <form [formGroup]="inputBrandForm">
-    <select class="custom-select mr-sm-2" id="inputNamaSuplier" formControlName="brand_name">
+    <select class="custom-select mr-sm-2" id="inputNamaSuplier" formControlName="brand_name" (change)="filterBrand()"> 
       <option value="" selected></option>
       <option *ngFor="let brand of brandList" value="{{ brand._id }}">
         {{ brand?._id }}
@@ -18,8 +12,23 @@
     </select>
   </form>
 </div>
-
-<br /><br />
+<br>
+<div *ngIf="isAlert" class="alert alert-danger col align-items-center" role="alert">
+  <p>
+    <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample"
+      aria-expanded="false" aria-controls="collapseExample">
+      {{lowProduct?.length}} Notification
+    </button>
+  </p>
+  <div class="collapse" id="collapseExample">
+    <div class="card card-body">
+      <!-- <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Danger:">
+    <use xlink:href="#exclamation-triangle-fill" />
+  </svg> -->
+      <div *ngFor="let index of lowProduct">{{index}} kurang dari 10 <button (click)="closeNotification(index)">X</button> </div>
+    </div>
+  </div>
+</div>
 <table class="table table-striped table-bordered table-hover">
   <thead class="thead-dark">
     <tr>

@@ -22,8 +22,11 @@ div.card.product {
     margin-top: 15px;
     margin-left: 30px;
   }
-  
   .alert {
-    position: fixed;
+    /* position: fixed; */
     /* margin-top: 20%; */
+    top: 0;
+  }
+  .alert p {
+    margin: 0;
   }
