@@ -19,7 +19,7 @@ import Swal from 'sweetalert2';
 export class ProductListInventoryComponent implements OnInit {
   title = 'Custom Search';
   searchText: any;
-  Product!: Product[];
+  products!: Product[];
   productImages!: any[];
   UpdateStatusSubcription!: Subscription;
   inputBrandForm!: FormGroup;
@@ -28,7 +28,7 @@ export class ProductListInventoryComponent implements OnInit {
   subscribeListBrand?: Subscription;
   subscribeListProduct?: Subscription;
   subscribeFilterBrand?: Subscription;
-  isAlert = true;
+  isAlert = false;
   lowProduct?: any[];
 
   constructor(
@@ -48,20 +48,26 @@ export class ProductListInventoryComponent implements OnInit {
     this.inputBrandForm = this.formBuilder.group({
       brand_name: new FormControl('', [Validators.required]),
     });
-    this.subscribeListProduct = this.inventoryService.getAllProduct().subscribe((data) => {
-      this.Product = data;
-      const images = [];
-      const product = [];
+    this.subscribeListProduct = this.inventoryService.getAllProduct().subscribe((response: any) => {
+      this.products = response.data;
+      const data = response.data
+      const products = [];
       for (let i = 0; i < data.length; i++) {
-        images.push("data:image/jpeg;base64" + data[i].image)
-        this.productImages = images
+        // this.products[i].image = "data:image/jpeg;base64," + data[i].image.data
+        // this.inventoryService.renderBin(data[i].image.data).subscribe((result: any) => {
+        //   // this.products[i].image = "data:image/jpeg;base64," + result
+        // })
+        this.products[i].image = this.inventoryService.getImg(data[i].image.data)
         if (data[i].stock! < 10) {
-          product.push(data[i].brand_name + "_" + data[i].product_name + "_" + data[i].uom)
-          this.lowProduct = product
+          products.push(data[i].brand_name + "_" + data[i].product_name + "_" + data[i].uom)
         }
       }
-      this.checkLowProduct;
+      console.log(this.products)
       this.subscribeListProduct?.unsubscribe()
+      // this.productImages = images
+      this.lowProduct = products
+      if (this.lowProduct?.length > 0) { this.isAlert = true }
+      // console.log(this.products[0].image, this.productImages, this.lowProduct)
     });
 
   }
@@ -69,18 +75,18 @@ export class ProductListInventoryComponent implements OnInit {
     const reqBodyBrand: object = { brand_name: this.inputBrandForm.get('brand_name')?.value };
     if (this.inputBrandForm.get('brand_name')?.value !== '') {
       this.subscribeFilterBrand = this.inventoryService.getProductByBrand(reqBodyBrand).subscribe((response: any) => {
-        this.Product = response.data;
+        this.products = response.data;
         this.subscribeFilterBrand?.unsubscribe
       });
     } else {
-      this.subscribeFilterBrand = this.inventoryService.getAllProduct().subscribe((Product) => {
-        this.Product = Product;
+      this.subscribeFilterBrand = this.inventoryService.getAllProduct().subscribe((response: any) => {
+        this.products = response.data;
         this.subscribeFilterBrand?.unsubscribe
       });
     }
   }
-  closeNotification(product: any) {
-    const index = this.lowProduct?.indexOf(product);
+  closeNotification(item: any) {
+    const index = this.lowProduct?.indexOf(item);
     if (index! > -1) {
       this.lowProduct!.splice(index!, 1)
       this.checkLowProduct()

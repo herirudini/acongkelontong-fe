@@ -9,10 +9,10 @@
   </thead>
   <tbody>
     <tr *ngFor="let i of ListUser">
-      <td>{{ i._id }}</td>
-      <td>{{ i.role }}</td>
-      <td>{{ i.username}}</td>
-      <td>{{ i.email }}</td>
+      <td *ngIf="i.role != 'owner'">{{ i._id }}</td>
+      <td *ngIf="i.role != 'owner'">{{ i.role }}</td>
+      <td *ngIf="i.role != 'owner'">{{ i.username}}</td>
+      <td *ngIf="i.role != 'owner'">{{ i.email }}</td>
     </tr>
   </tbody>
 </table>

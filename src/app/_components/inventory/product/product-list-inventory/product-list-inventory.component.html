@@ -1,10 +1,9 @@
-
 <h4>Daftar Produk</h4>
 <div class="d-flex">
   <input [(ngModel)]="searchText" placeholder="Search" />
   <span class="ml-5 mr-1 mt-1"> Filter: </span>
   <form [formGroup]="inputBrandForm">
-    <select class="custom-select mr-sm-2" id="inputNamaSuplier" formControlName="brand_name" (change)="filterBrand()"> 
+    <select class="custom-select mr-sm-2" id="inputNamaSuplier" formControlName="brand_name" (change)="filterBrand()">
       <option value="" selected></option>
       <option *ngFor="let brand of brandList" value="{{ brand._id }}">
         {{ brand?._id }}
@@ -25,7 +24,8 @@
       <!-- <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Danger:">
     <use xlink:href="#exclamation-triangle-fill" />
   </svg> -->
-      <div *ngFor="let index of lowProduct">{{index}} kurang dari 10 <button (click)="closeNotification(index)">X</button> </div>
+      <div *ngFor="let index of lowProduct">{{index}} kurang dari 10 <button
+          (click)="closeNotification(index)">X</button> </div>
     </div>
   </div>
 </div>
@@ -46,7 +46,7 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let product of Product | filter: searchText">
+    <tr *ngFor="let product of products | filter: searchText">
       <td class="action">
         <button *ngIf="product?.status === 'inactive'" class="btn btn-outline-primary"
           (click)="activate(product?._id, product?.status)" [disabled]="product?.stock < 10">
@@ -67,9 +67,9 @@
       <td>{{ product?.sellPrice | currency: "IDR" }}</td>
       <td>{{ product?.stock }}</td>
       <td>
-        <img src="data:image/jpeg;base64,product.image" alt="product image" width="100" height="100" />
+        <!-- // 3 metode berbeda dicoba buat decoding, gambar tetap tidak ada yg muncul : Decode all Buffer, Decode pake built in ArrayBuffer, Decode Blob, dan sudah pake sanitizer, gambar tetap dianggap crash-->
+        <img [src]='product.image' alt="product image" width="100" height="100" />
       </td>
-      <!-- <td>{{ product.status }}</td>  data:image/jpeg;base64,-->
     </tr>
   </tbody>
 </table>

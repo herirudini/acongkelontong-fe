@@ -1,10 +1,10 @@
 export interface Product {
-    _id : string;
+    _id: string;
     status: string;
     suplier_name: string;
     brand_name: string;
     product_name: string;
-    image: string;
+    image: string | null;
     uom: string;
     stock: number;
     buyPrice: number;
