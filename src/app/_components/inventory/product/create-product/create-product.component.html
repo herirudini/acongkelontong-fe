@@ -105,15 +105,18 @@
 
 
         <div class="form-group col-9 col-md-4">
-          <form [formGroup]="uploadForm" (ngSubmit)="previewImage()">
+          <form [formGroup]="uploadForm" (ngSubmit)="onUpload()">
             <label for="inputGambar">Gambar</label>
             <div class="input-group">
+              <div *ngIf="previewImage">
+                <img [src]="previewImage" alt="image-preview" id="image-preview" style="width:400px; height:250px">
+              </div>
               <div class="custom-file">
                 <input type="file" formControlName="chooseImage" class="custom-file-input" id="exampleInputFile" (change)="onFileSelected($event)"/>
                 <label class="custom-file-label" for="exampleInputFile">Choose file</label>
               </div>
               <div class="input-group-append">
-                <span type="submit" class="input-group-text">Upload</span>
+                <button type="submit" class="input-group-text">Upload</button>
               </div>
             </div>
           </form>

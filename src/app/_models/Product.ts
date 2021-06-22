@@ -4,7 +4,7 @@ export interface Product {
     suplier_name: string;
     brand_name: string;
     product_name: string;
-    image: string | null;
+    image: any;
     uom: string;
     stock: number;
     buyPrice: number;

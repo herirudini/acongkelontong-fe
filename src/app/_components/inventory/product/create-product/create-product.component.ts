@@ -70,9 +70,35 @@ export class CreateProductComponent implements OnInit {
     });
   }
   onFileSelected(event: any) {
-    this.inventoryService.convertFile(event.target.files[0]).subscribe((result: any) => {
-      this.addProductForm.controls['image'].setValue(result)
-    })
+    const file = event.target?.files[0];
+    // this.form.patchValue({ image: file });
+    const allowedMimeTypes = ["image/png", "image/jpeg", "image/jpg"];
+    if (file && allowedMimeTypes.includes(file.type)) {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => {
+        this.previewImage = reader.result as string;
+        console.log(file, this.previewImage)
+      };
+    }
+  }
+  onUpload() {
+    const img: any = document.getElementById('image-preview')
+    img.crossOrigin = "Anonymous";
+    img.onload = ()=> {
+      const canvas = document.createElement('canvas');
+      const ctx = canvas.getContext('2d');
+      canvas.height = img!.naturalHeight
+      canvas.width = img!.naturalWidth
+      ctx!.drawImage(img,0,0);
+      const data = canvas.toDataURL('image/webp')
+      this.addProductForm.controls['image'].setValue(data)
+      console.log(this.addProductForm.get('image')?.value)
+    }
+    // const img = document.getElementById('image-preview');
+    // const encode = this.inventoryService.encode(img)
+    //   this.addProductForm.controls['image'].setValue(encode)
+    //   console.log(this.addProductForm.get('image')?.value)
   }
   onSubmit() {
     console.log(this.addProductForm.value)

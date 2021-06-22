@@ -5,6 +5,7 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
+import { DomSanitizer } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Product } from 'src/app/_models/Product';
@@ -34,7 +35,8 @@ export class ProductListInventoryComponent implements OnInit {
   constructor(
     public formBuilder: FormBuilder,
     private inventoryService: InventoryService,
-    public router: Router
+    public router: Router,
+    private domSanitizer: DomSanitizer
   ) { }
 
   ngOnInit(): void {
@@ -53,15 +55,23 @@ export class ProductListInventoryComponent implements OnInit {
       const data = response.data
       const products = [];
       for (let i = 0; i < data.length; i++) {
-        // this.products[i].image = "data:image/jpeg;base64," + data[i].image.data
         // this.inventoryService.renderBin(data[i].image.data).subscribe((result: any) => {
-        //   // this.products[i].image = "data:image/jpeg;base64," + result
+        //   this.products[i].image = result
         // })
-        this.products[i].image = this.inventoryService.getImg(data[i].image.data)
+        // this.products[i].image = this.inventoryService.getImg(data[i].image.data)
+        const file = data[i].image;
+        if (file) {
+          const reader = new FileReader();
+          reader.readAsDataURL(new Blob([file]));
+          reader.onload = () => {
+            this.products[i].image = this.domSanitizer.bypassSecurityTrustResourceUrl(reader.result as string);
+          };
+        }
         if (data[i].stock! < 10) {
           products.push(data[i].brand_name + "_" + data[i].product_name + "_" + data[i].uom)
         }
       }
+      // console.log(this.products[0].image)
       console.log(this.products)
       this.subscribeListProduct?.unsubscribe()
       // this.productImages = images

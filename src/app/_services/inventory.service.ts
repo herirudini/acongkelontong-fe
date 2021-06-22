@@ -13,6 +13,11 @@ import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
   providedIn: 'root',
 })
 export class InventoryService {
+  canvas!: HTMLCanvasElement;
+  ctx!: CanvasRenderingContext2D | null;
+  container: any;
+  cw: any;
+  ch: any;
   constructor(private http: HttpClient, private domSanitizer: DomSanitizer) { }
   addSuplier(data: any) {
     console.log('ok2');
@@ -34,25 +39,36 @@ export class InventoryService {
   addProduct(data: any) {
     return this.http.post<any>(`${apiURL}/inventory/product`, data);
   }
-  convertFile(file: File): Observable<string> {
-    const result = new ReplaySubject<string>(1);
-    const reader = new FileReader();
-    reader.readAsBinaryString(file);
-    reader.onload = (event: any) => result.next(btoa(event.target.result.toString()));
-    return result;
+  encode(source: HTMLElement | null) {
+    // const result = new String;
+    // source?.crossOrigin
+    // source?.onload;
+    this.container = source;
+    this.cw = this.container.naturalWidth;
+    this.ch = this.container.naturalHeight;
+    this.canvas = document.createElement('canvas') as HTMLCanvasElement;
+    this.ctx = this.canvas.getContext('2d');
+    this.canvas.width = this.cw;
+    this.canvas.height = this.ch;
+    this.ctx?.drawImage(this.container,0,0)
+    // this.container.appendChild(this.canvas);
+    const buff = this.canvas.toDataURL('image/jpeg');
+    // reader.onload = (event: any) => result.next(btoa(event.target.result.toString()));
+    return buff;
   }
-  renderBin(file: Blob): Observable<string> {
+  renderBin(file: ArrayBuffer): Observable<string> {
     const result = new ReplaySubject<string>(1);
     const reader = new FileReader();
-    reader.readAsArrayBuffer(new Blob([file]));
+    reader.readAsDataURL(new Blob([file]));
     // reader.readAsBinaryString(new Blob([file]))
-    reader.onload = (event: any) => result.next(btoa(event.target.result.toString('base64')));
+    reader.onload = (event: any) => result.next(btoa(event.target.result as string));
     // reader.onload = (e: any) => result.next(btoa(e.target.result.toString()
     //     .split('')
     //     .map((bit: any) =>
     //       bit.codePointAt(0).toString(16).toUpperCase())
     //     .join('')
     // ))
+    this.domSanitizer.bypassSecurityTrustResourceUrl('data:image/webp;base64,' + result)
     return result
   }
   // NUI2RjYyNkE2NTYzNzQyMDQxNzI3MjYxNzk0Mjc1NjY2NjY1NzI1RA==
@@ -60,7 +76,8 @@ export class InventoryService {
   getImg(file: ArrayBuffer) {
     const convert = this.converter2(file)
     const sanitize = this.domSanitizer.sanitize(SecurityContext.RESOURCE_URL, convert)
-    return sanitize
+    const result = sanitize as string
+    return result
   }
   converter2(file: ArrayBuffer): SafeUrl {
     let TYPED_ARRAY = new Uint8Array(file);
@@ -68,7 +85,7 @@ export class InventoryService {
       return data + String.fromCharCode(byte);
     }, '');
     let base64String: string = btoa(STRING_CHAR);
-    const result = this.domSanitizer.bypassSecurityTrustResourceUrl('data:image/jpeg;base64,' + base64String)
+    const result = this.domSanitizer.bypassSecurityTrustResourceUrl('data:image/webp;base64,' + base64String)
     return result
   }
   addPurchaseOrder(data: any) {
@@ -78,7 +95,7 @@ export class InventoryService {
     return this.http.post<any>(`${apiURL}/inventory/delivery-order`, data);
   }
   getAllProduct() {
-    return this.http.get<any>(`${apiURL}/inventory/product`, { responseType: 'json' });
+    return this.http.get<any>(`${apiURL}/inventory/product`);
   }
   listAllBrand() {
     return this.http.get(`${apiURL}/inventory/listBrand`)
